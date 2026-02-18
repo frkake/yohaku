@@ -6,8 +6,7 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
+  pull-requests: write
 
 concurrency:
   group: "stillmotion-server-update"
@@ -16,8 +15,6 @@ concurrency:
 jobs:
   update-release:
     runs-on: ubuntu-latest
-    outputs:
-      changed: ${{ steps.check.outputs.changed }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -109,21 +106,22 @@ jobs:
             --repo "${{ github.repository }}" \
             --tag "${{ steps.check.outputs.tag }}"
 
-      - name: Commit and push
+      - name: Create pull request
         if: steps.check.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.STILLMOTION_CI_REPO_PAT }}
         run: |
+          VERSION="${{ steps.payload.outputs.version }}"
+          BRANCH="chore/update-stillmotion-server-v${VERSION}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
           git add data/downloads/
           git diff --staged --quiet && exit 0
-          git commit -m "chore: update StillMotion Server to v${{ steps.payload.outputs.version }}"
-          git push
+          git commit -m "chore: update StillMotion Server to v${VERSION}"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "chore: update StillMotion Server to v${VERSION}" \
+            --body "Automated update of StillMotion Server to v${VERSION}" \
+            --base main
 
-  deploy:
-    needs: update-release
-    if: needs.update-release.outputs.changed == 'true'
-    uses: ./.github/workflows/deploy.yml
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
