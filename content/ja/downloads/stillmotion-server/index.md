@@ -1,5 +1,5 @@
 ---
-title: "StillMotionローカルサーバー"
+title: "StillMotion ローカルサーバー"
 description: "PCのメディアをiPhone/iPadから閲覧できるローカルサーバー。ゼロ設定、QRコードペアリング。macOS/Linux/Windows対応。無料。"
 downloadDataKey: "stillmotion-server"
 features:

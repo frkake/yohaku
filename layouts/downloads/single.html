@@ -10,23 +10,16 @@
   <article>
     {{/* ===== Hero Section ===== */}}
     <section class="dl-hero">
-      {{/* App Icon */}}
-      {{ with $appData }}
-        {{ $icon := resources.Get .icon }}
-        {{ $iconDark := false }}
-        {{ with .iconDark }}
-          {{ $iconDark = resources.Get . }}
-        {{ end }}
-        {{ if and $icon $iconDark }}
-          <img src="{{ $icon.RelPermalink }}" alt="{{ .name }}" class="dl-hero-icon app-icon-light" width="96" height="96">
-          <img src="{{ $iconDark.RelPermalink }}" alt="{{ .name }}" class="dl-hero-icon app-icon-dark" width="96" height="96">
-        {{ else if $icon }}
-          <img src="{{ $icon.RelPermalink }}" alt="{{ .name }}" class="dl-hero-icon" width="96" height="96">
-        {{ end }}
+      {{/* Server Icon (centered, large) */}}
+      {{ $icon := resources.Get "images/apps/stillmotion-server/icon.png" }}
+      {{ $iconDark := resources.Get "images/apps/stillmotion-server/icon-dark.png" }}
+      {{ if and $icon $iconDark }}
+        <div class="dl-hero-icon-wrapper">
+          <img src="{{ $icon.RelPermalink }}" alt="StillMotion Server" class="dl-hero-icon app-icon-light" width="96" height="96">
+          <img src="{{ $iconDark.RelPermalink }}" alt="StillMotion Server" class="dl-hero-icon app-icon-dark" width="96" height="96">
+        </div>
       {{ end }}
-
       <h1 class="dl-hero-title">{{ .Title }}</h1>
-
       <span class="dl-version-badge">v{{ $release.version }}</span>
 
       {{/* Overview from markdown content */}}

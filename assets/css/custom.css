@@ -534,12 +534,16 @@ code, pre {
   margin: 0 auto;
 }
 
+.dl-hero-icon-wrapper {
+  display: inline-block;
+  margin-bottom: var(--space-5);
+}
+
 .dl-hero-icon {
   width: 96px;
   height: 96px;
   border-radius: var(--radius-icon);
   box-shadow: var(--shadow-md);
-  margin-bottom: var(--space-5);
 }
 
 .dl-hero-title {
