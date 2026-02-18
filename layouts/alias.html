@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ .Permalink }}</title>
+  <link rel="canonical" href="{{ .Permalink }}" />
+  <meta name="robots" content="noindex">
+  <meta charset="utf-8" />
+  <script>
+    (function() {
+      var target = '{{ .Permalink }}';
+      try {
+        var url = new URL(target);
+        if (url.pathname === '/ja/') {
+          var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+          if (!lang.startsWith('ja')) {
+            url.pathname = '/en/';
+            target = url.toString();
+          }
+        }
+      } catch(e) {}
+      window.location.replace(target);
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url={{ .Permalink }}" />
+  </noscript>
+</head>
+</html>
