@@ -802,12 +802,14 @@ code, pre {
 }
 
 .dl-features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-5);
 }
 
 .dl-feature-item {
+  width: calc((100% - var(--space-5) * 2) / 3);
   text-align: center;
   padding: var(--space-4);
 }
@@ -1112,8 +1114,8 @@ code, pre {
     justify-content: space-between;
   }
 
-  .dl-features-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .dl-feature-item {
+    width: calc((100% - var(--space-5)) / 2);
   }
 
   /* Local server card responsive */
