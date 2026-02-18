@@ -6,10 +6,10 @@
   {{ $ancestors := .Ancestors.Reverse }}
   {{ range $ancestors }}
     {{ if not .IsHome }}
-      {{ $breadcrumbs = $breadcrumbs | append (dict "name" .Title "url" .Permalink) }}
+      {{ $breadcrumbs = $breadcrumbs | append (dict "name" .LinkTitle "url" .Permalink) }}
     {{ end }}
   {{ end }}
-  {{ $breadcrumbs = $breadcrumbs | append (dict "name" .Title "url" .Permalink) }}
+  {{ $breadcrumbs = $breadcrumbs | append (dict "name" .LinkTitle "url" .Permalink) }}
 {{ end }}
 
 {{ if gt (len $breadcrumbs) 1 }}

@@ -1,5 +1,6 @@
 ---
 title: "StillMotion - Features | Media Viewer for iOS, iPadOS & macOS"
+linkTitle: "StillMotion"
 description: "Supports 20+ formats including RAW, MKV, and WebM. Slideshow, tile view, dual-engine video playback. Dropbox and Google Drive integration. No ads. One-time purchase."
 layout: "single"
 showTableOfContents: false

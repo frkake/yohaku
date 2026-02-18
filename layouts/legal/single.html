@@ -1,0 +1,50 @@
+{{ define "main" }}
+  {{ $parent := .Parent }}
+  {{ $appSlug := $parent.Params.app.slug }}
+  {{ $appData := index site.Data.apps $appSlug }}
+  {{ $appIcon := resources.Get $appData.icon }}
+
+  <article class="legal-page">
+    {{/* Header */}}
+    <header class="legal-header">
+      {{ partial "breadcrumbs.html" . }}
+
+      {{ with $appData }}
+        <div class="legal-app-context">
+          {{ with $appIcon }}
+            <img src="{{ .RelPermalink }}" alt="{{ $appData.name }}" width="32" height="32" class="legal-app-icon">
+          {{ end }}
+          <span>{{ .name }}</span>
+        </div>
+      {{ end }}
+
+      <h1 class="legal-title">{{ .Title }}</h1>
+
+      {{ with .Date }}
+        <p class="legal-date">{{ i18n "last_updated" }}: {{ .Format "2006-01-02" }}</p>
+      {{ end }}
+    </header>
+
+    {{/* Content */}}
+    <section class="legal-content prose dark:prose-invert">
+      {{ .Content }}
+    </section>
+
+    {{/* Footer */}}
+    <footer class="legal-footer">
+      {{/* Sibling legal pages */}}
+      <nav class="legal-sibling-nav">
+        {{ range $parent.Pages }}
+          {{ if and (eq .Type "legal") (ne .RelPermalink $.RelPermalink) }}
+            <a href="{{ .RelPermalink }}" class="legal-sibling-link">{{ .Title }}</a>
+          {{ end }}
+        {{ end }}
+      </nav>
+
+      {{/* Back to app page */}}
+      <a href="{{ $parent.RelPermalink }}" class="legal-back-link">
+        &larr; {{ $appData.name }}
+      </a>
+    </footer>
+  </article>
+{{ end }}

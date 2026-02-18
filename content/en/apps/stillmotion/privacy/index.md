@@ -7,10 +7,6 @@ showDate: true
 showReadingTime: false
 ---
 
-## Privacy Policy
-
-Last updated: February 18, 2025
-
 yohaku ("we", "our") respects your privacy and is committed to protecting your personal information when you use our application "StillMotion" ("the App").
 
 ### Information We Collect

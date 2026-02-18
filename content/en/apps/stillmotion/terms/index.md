@@ -7,10 +7,6 @@ showDate: true
 showReadingTime: false
 ---
 
-## Terms of Use
-
-Last updated: February 18, 2025
-
 These Terms of Use ("Terms") govern your use of the application "StillMotion" ("the App") provided by yohaku ("we", "our"). By using the App, you agree to these Terms.
 
 ### The App

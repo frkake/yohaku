@@ -90,7 +90,7 @@
       {{ with $legalPages }}
         <section class="legal-links">
           {{ range . }}
-            <a href="{{ .Permalink }}">{{ .Title }}</a>
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
           {{ end }}
         </section>
       {{ end }}
