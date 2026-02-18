@@ -1,0 +1,7 @@
+{{/* Download Button
+     Expects: .url, .platform */}}
+{{ with .url }}
+  <a href="{{ . }}" class="download-btn bg-neutral-100 dark:bg-neutral-700 text-neutral-900 dark:text-neutral" download>
+    {{ i18n "download" | default "Download" }}
+  </a>
+{{ end }}

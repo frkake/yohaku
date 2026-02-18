@@ -1,0 +1,12 @@
+# Hugo build output
+public/
+resources/
+.hugo_build.lock
+hugo_stats.json
+_vendor/
+
+# Dependencies
+node_modules/
+
+# Binary releases (uploaded to GitHub Releases, not tracked in git)
+releases/

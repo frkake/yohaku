@@ -1,0 +1,494 @@
+/* Less is More - Custom Styles
+   Design tokens from visual-identity.md */
+
+/* =========================================================================
+   Typography
+   ========================================================================= */
+:root {
+  --font-heading: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
+
+  /* Spacing (8px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+
+  /* Borders */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-icon: 22%;
+
+  /* Shadows (light mode only) */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* Animation */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --duration-slow: 350ms;
+
+  /* Layout */
+  --content-max: 1200px;
+  --content-text: 720px;
+  --grid-gutter: 1.5rem;
+
+  /* App-specific colors */
+  --color-sm-primary: #4A9ECC;
+  --color-sm-accent: #4DD9C0;
+  --color-dr-primary: #78CCBE;
+  --color-dr-morning: #F0A050;
+  --color-dr-afternoon: #5EBB78;
+  --color-dr-night: #8B6BB5;
+}
+
+/* =========================================================================
+   Base Typography Overrides
+   ========================================================================= */
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+/* =========================================================================
+   Hero Section
+   ========================================================================= */
+.hero-section {
+  padding: var(--space-10) 0;
+  text-align: center;
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.hero-section h1 {
+  font-size: 3.052rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-4);
+}
+
+.hero-tagline {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+/* =========================================================================
+   App Cards
+   ========================================================================= */
+.app-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5);
+}
+
+.app-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
+}
+
+.app-card:hover {
+  transform: translateY(-2px);
+}
+
+.app-card-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-icon);
+  flex-shrink: 0;
+}
+
+.app-card-info h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 var(--space-1) 0;
+}
+
+.app-card-info p {
+  font-size: 0.875rem;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.badge-coming-soon {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  opacity: 0.8;
+}
+
+/* =========================================================================
+   App Detail Page
+   ========================================================================= */
+.app-hero {
+  text-align: center;
+  padding: var(--space-9) 0 var(--space-8);
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.app-hero-icon {
+  width: 128px;
+  height: 128px;
+  border-radius: var(--radius-icon);
+  margin-bottom: var(--space-5);
+}
+
+.app-hero h1 {
+  font-size: 2.441rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.app-hero-tagline {
+  font-size: 1.125rem;
+  opacity: 0.7;
+  margin-bottom: var(--space-5);
+}
+
+.platform-badges {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-5);
+}
+
+.platform-badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  opacity: 0.7;
+}
+
+/* =========================================================================
+   CTA / App Store Badge
+   ========================================================================= */
+.cta-section {
+  text-align: center;
+  padding: var(--space-6) 0;
+}
+
+.app-store-badge {
+  display: inline-block;
+  height: 48px;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.app-store-badge:hover {
+  opacity: 0.8;
+}
+
+/* =========================================================================
+   Features Grid
+   ========================================================================= */
+.features-section {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5);
+}
+
+.features-section h2 {
+  font-size: 1.953rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+.feature-card {
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.feature-card p {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+/* =========================================================================
+   Pricing Table
+   ========================================================================= */
+.pricing-section {
+  max-width: var(--content-text);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5);
+}
+
+.pricing-section h2 {
+  font-size: 1.953rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: var(--space-3);
+}
+
+.pricing-subtitle {
+  text-align: center;
+  opacity: 0.7;
+  margin-bottom: var(--space-6);
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.pricing-table th:first-child,
+.pricing-table td:first-child {
+  text-align: left;
+}
+
+.pricing-table thead th {
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding-bottom: var(--space-4);
+}
+
+/* =========================================================================
+   Download Page
+   ========================================================================= */
+.download-section {
+  max-width: var(--content-text);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5);
+}
+
+.download-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: var(--space-6);
+}
+
+.download-table th,
+.download-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.download-btn:hover {
+  opacity: 0.8;
+}
+
+/* =========================================================================
+   Footer Custom (3-column)
+   ========================================================================= */
+.footer-custom {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5) var(--space-6);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.footer-custom h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.footer-custom ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-custom li {
+  margin-bottom: var(--space-2);
+}
+
+.footer-custom a {
+  font-size: 0.875rem;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.8;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.footer-custom a:hover {
+  opacity: 1;
+}
+
+/* =========================================================================
+   Content Width Constraint
+   ========================================================================= */
+.content-text {
+  max-width: var(--content-text);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+/* =========================================================================
+   Setup Guide (collapsible)
+   ========================================================================= */
+details.setup-guide {
+  margin: var(--space-6) 0;
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+}
+
+details.setup-guide summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+details.setup-guide ol {
+  margin-top: var(--space-4);
+  padding-left: var(--space-5);
+}
+
+details.setup-guide li {
+  margin-bottom: var(--space-3);
+  line-height: 1.7;
+}
+
+/* =========================================================================
+   Scroll Animation
+   ========================================================================= */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--duration-slow) var(--ease-out),
+              transform var(--duration-slow) var(--ease-out);
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================================
+   Reduced Motion
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .fade-in-up {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+@media (max-width: 639px) {
+  .hero-section {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .app-cards {
+    grid-template-columns: 1fr;
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-custom {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  .app-hero {
+    padding: var(--space-7) var(--space-4) var(--space-6);
+  }
+
+  .app-hero-icon {
+    width: 96px;
+    height: 96px;
+  }
+
+  .app-hero h1 {
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

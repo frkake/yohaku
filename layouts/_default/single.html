@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <article>
+    <header class="content-text" style="padding-top: var(--space-8);">
+      {{ if .Params.showBreadcrumbs | default (site.Params.article.showBreadcrumbs | default false) }}
+        {{ partial "breadcrumbs.html" . }}
+      {{ end }}
+      <h1 class="mt-2 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        {{ .Title | emojify }}
+      </h1>
+      {{ with .Description }}
+        <p class="mt-2 text-base text-neutral-500 dark:text-neutral-400">{{ . }}</p>
+      {{ end }}
+    </header>
+
+    <section class="content-text prose dark:prose-invert" style="padding: var(--space-6) var(--space-5) var(--space-8);">
+      {{ .Content }}
+    </section>
+  </article>
+{{ end }}

@@ -1,0 +1,11 @@
+{{/* App Store Badge
+     Expects: .url (App Store URL), .page */}}
+{{ with .url }}
+  <a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="app-store-badge" aria-label="{{ i18n "download_on_app_store" | default "Download on the App Store" }}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="50" viewBox="0 0 150 50" role="img" aria-hidden="true">
+      <rect width="150" height="50" rx="7" fill="#000"/>
+      <text x="75" y="20" fill="#fff" font-size="8" font-family="system-ui, sans-serif" text-anchor="middle">{{ i18n "download_on" | default "Download on the" }}</text>
+      <text x="75" y="36" fill="#fff" font-size="14" font-family="system-ui, sans-serif" font-weight="600" text-anchor="middle">App Store</text>
+    </svg>
+  </a>
+{{ end }}

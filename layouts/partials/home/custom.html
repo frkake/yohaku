@@ -1,0 +1,14 @@
+{{/* Home page - custom layout for Less is More */}}
+
+{{/* Hero Section */}}
+<section class="hero-section fade-in-up">
+  <h1 class="text-neutral-900 dark:text-neutral">{{ .Site.Title }}</h1>
+  <p class="hero-tagline text-neutral-500 dark:text-neutral-400">{{ .Site.Params.description }}</p>
+</section>
+
+{{/* Featured Apps Section */}}
+<section class="app-cards">
+  {{ range sort (index .Site.Data.apps) "slug" }}
+    {{ partial "app-card.html" (dict "app" . "site" $.Site) }}
+  {{ end }}
+</section>

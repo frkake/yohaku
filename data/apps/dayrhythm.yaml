@@ -1,0 +1,10 @@
+slug: "dayrhythm"
+name: "DayRhythm"
+tagline:
+  ja: "一日のリズムを、あなたの手に。"
+  en: "Your daily rhythm, in your hands."
+icon: "images/apps/dayrhythm/icon.png"
+iconDark: "images/apps/dayrhythm/icon-dark.png"
+platforms:
+  - iOS
+status: "coming_soon"

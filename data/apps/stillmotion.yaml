@@ -1,0 +1,14 @@
+slug: "stillmotion"
+name: "StillMotion"
+tagline:
+  ja: "画像も動画も、区別なく。"
+  en: "Images and videos, without boundaries."
+icon: "images/apps/stillmotion/icon.png"
+iconDark: "images/apps/stillmotion/icon-dark.png"
+platforms:
+  - iOS
+  - iPadOS
+  - macOS
+  - watchOS
+appStoreUrl: "https://apps.apple.com/app/stillmotion/id6737835203"
+status: "released"

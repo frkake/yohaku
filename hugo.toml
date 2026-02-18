@@ -1,0 +1,132 @@
+# =============================================================================
+# Less is More - Hugo Configuration
+# =============================================================================
+baseURL = "https://example.com/"
+languageCode = "ja"
+defaultContentLanguage = "ja"
+defaultContentLanguageInSubdir = true
+hasCJKLanguage = true
+title = "Less is More"
+enableRobotsTXT = true
+enableEmoji = false
+enableInlineShortcodes = true
+
+# Theme (Hugo Modules)
+theme = "github.com/nunocoracao/blowfish/v2"
+
+# =============================================================================
+# Build
+# =============================================================================
+[build]
+  writeStats = true
+
+[minify]
+  minifyOutput = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# =============================================================================
+# Markup
+# =============================================================================
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+
+# =============================================================================
+# Blowfish Theme Parameters
+# =============================================================================
+[params]
+  colorScheme = "lessismore"
+  defaultAppearance = "light"
+  autoSwitchAppearance = true
+  enableSearch = false
+  enableCodeCopy = false
+
+  description = "Less, but better."
+  keywords = ["StillMotion", "DayRhythm", "アプリ", "メディアビューア"]
+
+  [params.homepage]
+    layout = "custom"
+    showRecent = false
+
+  [params.article]
+    showDate = false
+    showDateUpdated = false
+    showReadingTime = false
+    showTableOfContents = false
+    showBreadcrumbs = true
+
+  [params.list]
+    showBreadcrumbs = true
+    showTableOfContents = false
+    groupByYear = false
+
+  [params.header]
+    layout = "basic"
+
+  [params.footer]
+    showCopyright = true
+    showThemeAttribution = false
+
+# =============================================================================
+# Hugo Modules
+# =============================================================================
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.114.0"
+
+  [[module.imports]]
+    path = "github.com/nunocoracao/blowfish/v2"
+
+# =============================================================================
+# Languages
+# =============================================================================
+[languages]
+  [languages.ja]
+    title = "Less is More"
+    weight = 1
+    languageCode = "ja"
+    languageName = "日本語"
+    contentDir = "content/ja"
+    [languages.ja.params]
+      description = "Less, but better."
+
+    [[languages.ja.menus.main]]
+      name = "Apps"
+      pageRef = "apps"
+      weight = 1
+
+    [[languages.ja.menus.main]]
+      name = "Contact"
+      pageRef = "contact"
+      weight = 2
+
+  [languages.en]
+    title = "Less is More"
+    weight = 2
+    languageCode = "en"
+    languageName = "English"
+    contentDir = "content/en"
+    [languages.en.params]
+      description = "Less, but better."
+
+    [[languages.en.menus.main]]
+      name = "Apps"
+      pageRef = "apps"
+      weight = 1
+
+    [[languages.en.menus.main]]
+      name = "Contact"
+      pageRef = "contact"
+      weight = 2
+
+# =============================================================================
+# Taxonomies
+# =============================================================================
+[taxonomies]
+  platform = "platforms"

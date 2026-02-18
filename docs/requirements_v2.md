@@ -48,7 +48,9 @@
 
 ### 2.1 全体コンセプト: "Quiet Craft"（静かなる技巧）
 
-「Less is More」を発展させ、「削ぎ落とすこと自体に価値がある」という世界観。華美な装飾や過剰な演出を排し、プロダクトそのものの完成度で語るサイト。
+ホームページ名はLess is More。
+
+その「Less is More」を発展させ、「削ぎ落とすこと自体に価値がある」という世界観。華美な装飾や過剰な演出を排し、プロダクトそのものの完成度で語るサイト。
 
 **3つの柱:**
 
@@ -58,8 +60,8 @@
 
 ### 2.2 サイト名・タグライン
 
-- **推奨サイト名**: **frkake studio**（既存ドメインとの統一感、「studio」がクラフトマンシップを暗示）
-- **推奨タグライン**: 「**Less, but better.**」または「**Quiet software for everyday life.**」
+- **推奨サイト名**: **Less is More**（既存ドメインとの統一感、「studio」がクラフトマンシップを暗示）
+- **推奨タグライン**: 「**Less, but better.**」
 
 ### 2.3 トーン & マナー
 
@@ -133,7 +135,7 @@
 | CTA Primary | App Store バッジ群（iOS/iPadOS/macOS） |
 | Overview | アプリの概要説明（2〜3段落） |
 | Features | 主要機能リスト（3〜6個、グリッド配置） |
-| Screenshots | スクリーンショットギャラリー（デバイスごと） |
+| Screenshots | スクリーンショットギャラリー（デバイスごと）。**ライト/ダーク両方を用意し、サイトの表示モードに連動して切り替える** |
 | Local Server | ローカルサーバー説明 + ダウンロードリンク |
 | CTA Secondary | App Store バッジ再掲 |
 
@@ -150,7 +152,7 @@
 |-----------|------|
 | Header | ソフトウェア名 + バージョン |
 | System Requirements | 対応OS・動作要件 |
-| Download Links | macOS / Linux / Windows ダウンロードボタン |
+| Download Links | macOS / Linux / Windows ダウンロードボタン（GitHub Releases からダウンロード） |
 | Installation Guide | 簡潔なインストール手順（折りたたみ可） |
 
 ### 3.3 ナビゲーション
@@ -231,6 +233,7 @@ DayRhythm       Terms of Use
 | DayRhythm | `#78CCBE` (ミント) | 朝 `#F0A050` / 昼 `#5EBB78` / 夜 `#8B6BB5` |
 
 - ダークモード: `prefers-color-scheme` に追従（手動トグル不要）
+- **アプリスクリーンショットの表示モード連動**: サイトがダークモードのときはアプリのダークモードのスクリーンショットを、ライトモードのときはライトモードのスクリーンショットを表示する。各スクリーンショットにつきライト版・ダーク版の2枚を用意し、`<picture>` + `prefers-color-scheme` メディアクエリ、またはJavaScriptによる切り替えで実装する
 
 ### 4.3 タイポグラフィ
 
@@ -333,7 +336,7 @@ DayRhythm       Terms of Use
 #### 主要機能（4つに絞り込み）
 
 1. **シームレスなスライドショー** - 「画像と動画を混ぜて、連続再生。」
-2. **タイル表示（Pro）** - 「最大30枚を、1画面に。」
+2. **タイル表示（有料）** - 「最大30枚を、1画面に。」
 3. **デュアルエンジン動画再生** - 「再生できないフォーマットは、もうない。」
 4. **7つのメディアソース** - 「保存場所を選ばない。」
 
@@ -344,7 +347,7 @@ DayRhythm       Terms of Use
 買い切り ¥800。サブスクなし。一度買えば、ずっと使える。
 ```
 
-- Free vs Pro 比較表（詳細は content_strategy.md 参照）
+- 無料版 vs フルバージョン 比較表（詳細は content_strategy.md 参照）
 - 「広告は一切ありません」を強調
 
 ### 5.3 ダウンロードページ（ローカルサーバー）
@@ -354,7 +357,7 @@ StillMotion Local Server
 PCのメディアを、手元のデバイスで。
 ```
 
-- macOS / Linux / Windows ダウンロードリンク
+- macOS / Linux / Windows ダウンロードリンク（GitHub Releases から配布）
 - 5ステップの簡易セットアップガイド
 
 ### 5.4 多言語方針
@@ -387,6 +390,12 @@ PCのメディアを、手元のデバイスで。
 
 **PaperMod を選ばない理由**: ドロップダウン非対応、カスタムセクションの柔軟性不足、ブログ特化
 
+## 禁止事項
+
+以下のことは遵守すること
+
+- 連絡先をかかないこと
+
 ### 6.2 ディレクトリ構成
 
 ```
@@ -414,8 +423,10 @@ homepage/
 │   ├── partials/              # app-card, download-button, etc.
 │   └── shortcodes/            # app-store-badge, download-table, etc.
 ├── static/
-│   ├── images/                # ロゴ、OGP画像
-│   └── downloads/             # バイナリファイル
+│   └── images/                # ロゴ、OGP画像
+├── releases/                  # GitHub Releases 用バイナリ（git管理外）
+│   └── stillmotion-server/
+│       └── v1.1/              # バージョンごとのバイナリ
 ├── i18n/                      # ja.yaml, en.yaml
 └── data/apps/                 # アプリメタデータ
 ```
@@ -436,6 +447,7 @@ app:
     - title: "機能名"
       description: "説明"
       image: "images/feature1.png"
+      imageDark: "images/feature1-dark.png"   # ダークモード用（省略時は image を使用）
 ```
 
 #### downloads/ - Front Matter
@@ -444,12 +456,34 @@ app:
 download:
   appSlug: "stillmotion"
   releases:
-    - version: "1.0.0"
+    - version: "1.1"
+      githubRelease: "stillmotion-server-v1.1"  # GitHub Releases のタグ名
       files:
-        - platform: "macOS"
-          filename: "StillMotionServer-macos-latest.pkg"
-          url: "/downloads/stillmotion/..."
-          size: "25MB"
+        - platform: "macOS (Apple Silicon)"
+          filename: "StillMotion-Server-1.1.dmg"
+          url: "https://github.com/{owner}/{repo}/releases/download/stillmotion-server-v1.1/StillMotion-Server-1.1.dmg"
+          size: "5.9MB"
+          note: "推奨。DMGインストーラー"
+        - platform: "macOS (Intel)"
+          filename: "stillmotion-server-darwin-amd64"
+          url: "https://github.com/{owner}/{repo}/releases/download/stillmotion-server-v1.1/stillmotion-server-darwin-amd64"
+          size: "7.1MB"
+        - platform: "Linux (x86_64)"
+          filename: "stillmotion-server-linux-amd64"
+          url: "https://github.com/{owner}/{repo}/releases/download/stillmotion-server-v1.1/stillmotion-server-linux-amd64"
+          size: "6.9MB"
+        - platform: "Linux (ARM64)"
+          filename: "stillmotion-server-linux-arm64"
+          url: "https://github.com/{owner}/{repo}/releases/download/stillmotion-server-v1.1/stillmotion-server-linux-arm64"
+          size: "6.6MB"
+        - platform: "Windows (x86_64)"
+          filename: "stillmotion-server-windows-amd64.exe"
+          url: "https://github.com/{owner}/{repo}/releases/download/stillmotion-server-v1.1/stillmotion-server-windows-amd64.exe"
+          size: "7.1MB"
+        - platform: "Windows (ARM64)"
+          filename: "stillmotion-server-windows-arm64.exe"
+          url: "https://github.com/{owner}/{repo}/releases/download/stillmotion-server-v1.1/stillmotion-server-windows-arm64.exe"
+          size: "6.6MB"
 ```
 
 ### 6.4 ショートコード
@@ -460,7 +494,60 @@ download:
 | `download-table` | ダウンロードファイルテーブル |
 | `platform-list` | 対応プラットフォーム一覧 |
 
-### 6.5 Hugo 設定概要（hugo.toml）
+### 6.5 バイナリ配布（GitHub Releases）
+
+StillMotion Local Server のバイナリファイルは **GitHub Releases** を通じて配布する。`static/downloads/` にバイナリを配置する方式は採用しない（Git リポジトリの肥大化を防ぐため）。
+
+#### バイナリ管理
+
+- ソースリポジトリ: `../StillMotion/LocalServer/` でビルド（`make all`）
+- ビルド成果物を `releases/stillmotion-server/v{VERSION}/` にコピー
+- `releases/` ディレクトリは `.gitignore` に追加し、Git 管理対象外とする
+- GitHub Releases にアップロードして配布
+
+#### 配布ファイル一覧（v1.1）
+
+| プラットフォーム | ファイル名 | サイズ | 備考 |
+|----------------|-----------|--------|------|
+| macOS (Apple Silicon) | `StillMotion-Server-1.1.dmg` | 5.9MB | 推奨。DMGインストーラー |
+| macOS (Apple Silicon) | `stillmotion-server-darwin-arm64` | 6.7MB | CLI バイナリ |
+| macOS (Intel) | `stillmotion-server-darwin-amd64` | 7.1MB | CLI バイナリ |
+| Linux (x86_64) | `stillmotion-server-linux-amd64` | 6.9MB | CLI バイナリ |
+| Linux (ARM64) | `stillmotion-server-linux-arm64` | 6.6MB | Raspberry Pi 等 |
+| Windows (x86_64) | `stillmotion-server-windows-amd64.exe` | 7.1MB | ダブルクリックで起動 |
+| Windows (ARM64) | `stillmotion-server-windows-arm64.exe` | 6.6MB | ダブルクリックで起動 |
+
+#### リリース手順
+
+```bash
+# 1. StillMotion LocalServer でビルド
+cd ../StillMotion/LocalServer
+make clean all
+
+# 2. homepage リポジトリにコピー
+cp build/* ../homepage/releases/stillmotion-server/v1.1/
+
+# 3. GitHub Release を作成しバイナリをアップロード
+gh release create stillmotion-server-v1.1 \
+  --title "StillMotion Server v1.1" \
+  --notes "StillMotion Local Server v1.1" \
+  releases/stillmotion-server/v1.1/*
+```
+
+#### ダウンロード URL 形式
+
+```
+https://github.com/{owner}/{repo}/releases/download/stillmotion-server-v{VERSION}/{filename}
+```
+
+ダウンロードページの Hugo テンプレートでは、Front Matter の `download.releases[].files[].url` に上記 URL を設定し、直接 GitHub Releases からダウンロードさせる。
+
+#### タグ命名規則
+
+- `stillmotion-server-v{VERSION}` （例: `stillmotion-server-v1.1`）
+- アプリ本体の App Store リリースとは独立したバージョニング
+
+### 6.6 Hugo 設定概要（hugo.toml）
 
 - テーマ: Blowfish（Hugo Modules 経由）
 - デフォルト言語: `ja`、`hasCJKLanguage = true`
@@ -502,6 +589,12 @@ download:
 | OGP | 1200x630 | PNG |
 | favicon | 32px, 180px | ICO, PNG |
 
+**ダーク/ライトモード画像切り替え**:
+- アプリのスクリーンショット・機能紹介画像は、ライト版とダーク版の2バリエーションを用意
+- 命名規則: `{name}.png`（ライト版） / `{name}-dark.png`（ダーク版）
+- `<picture>` 要素 + `prefers-color-scheme` メディアクエリで切り替え（JS不要、CSSのみ）
+- Hugo テンプレート/ショートコードで自動処理し、コンテンツ作成者の負担を最小化
+
 ### 7.4 パフォーマンス目標
 
 | 指標 | 目標値 |
@@ -521,7 +614,78 @@ download:
 - canonical URL
 - hreflang（多言語対応）
 
-### 7.6 分析ツール
+### 7.6 デザイン品質検証
+
+実装がデザイン仕様に忠実であること、そしてビジュアルとして完璧であることを保証する仕組み。
+構文の正しさではなく、**見た目の正しさ**を検証の中心に据える。
+
+#### 検証の哲学
+
+- 「HTMLとして正しいか」ではなく「**デザインとして完璧か**」を問う
+- デザイントークン（カラー、タイポグラフィ、スペーシング）が仕様通りに適用されているかを機械的に検証する
+- 人間の目による最終レビューを省略しない
+
+#### 1. デザイントークン検証（Playwright）
+
+CSS の算出値がデザイン仕様（セクション 4 で定義）に一致するかを自動テストする。
+
+| 検証項目 | 検証内容 |
+|----------|---------|
+| カラーパレット | 背景色・文字色・ブランドカラー・アクセントカラーが仕様値と一致 |
+| ダークモード切替 | ライト/ダーク各モードで全カラートークンが正しく反映 |
+| タイポグラフィ | フォントファミリー・ウェイト・サイズが各レベル（Display〜Body）で仕様通り |
+| スペーシング | セクション間余白・コンテンツ幅・ヒーロー余白が 8px ベースの設計と一致 |
+| 角丸 | カード (8px)・ボタン (4px)・チップ (2px) の border-radius が統一されている |
+| コントラスト比 | テキスト/背景のコントラスト比が WCAG 2.1 AA（4.5:1 以上）を満たす |
+
+#### 2. レイアウト構造検証（Playwright）
+
+要素の配置・サイズ・間隔を数値で検証する。
+
+| 検証項目 | 検証内容 |
+|----------|---------|
+| グリッド | コンテンツ最大幅 1200px、本文幅 720px を超えていない |
+| レスポンシブ | 各ブレークポイント（375px / 768px / 1280px）でレイアウト崩れがない |
+| 要素重なり | 要素同士がオーバーラップしていない |
+| CTA配置 | App Store バッジがページ上部・下部の指定位置に存在する |
+| ナビゲーション | ヘッダー項目数・フッター3カラム構造が仕様通り |
+
+#### 3. ビジュアルリグレッションテスト（Playwright スクリーンショット比較）
+
+ベースライン画像との差分を検出し、意図しないデザイン変更を防ぐ。
+
+- **検証マトリクス**:
+
+| 条件 | バリエーション |
+|------|--------------|
+| 表示モード | ライトモード / ダークモード |
+| ビューポート | モバイル (375px) / タブレット (768px) / デスクトップ (1280px) |
+| 言語 | 日本語 / 英語 |
+
+- 差分が閾値（ピクセル差 0.1% 以上）を超えた場合、PR にスクリーンショットの差分画像を添付
+- ベースライン画像の初回承認は**人間のデザインレビュー**を必須とする
+- ベースライン更新時も PR レビューでスクリーンショットの変更意図を明記
+
+#### 4. デザインレビュープロセス
+
+自動テストでは捕捉できない「全体の美しさ・バランス・余白のリズム」を人間が確認する。
+
+- **新規ページ追加時**: 全ビューポート × 全カラースキームのスクリーンショットを PR に添付し、レビュー
+- **デザイン変更時**: Before / After のスクリーンショットを比較し、レビュー
+- **判断基準**: セクション 2.5 の問い（「取り除いても伝わるか？」「3秒で目的を理解できるか？」）を適用
+
+#### 検証対象ページ
+
+| ページ | パス |
+|--------|------|
+| トップ | `/` |
+| StillMotion 詳細 | `/apps/stillmotion/` |
+| DayRhythm | `/apps/dayrhythm/` |
+| ダウンロード | `/downloads/stillmotion/` |
+| プライバシーポリシー | `/legal/privacy/` |
+| お問い合わせ | `/contact/` |
+
+### 7.7 分析ツール
 
 - **GA4**（推奨）- App Store マーケティングとの統合、無料
 - **Google Search Console** - 検索パフォーマンス
@@ -543,6 +707,7 @@ download:
 | **P2** | 会社概要ページ | about/ コンテンツ |
 | **P2** | 法的ページ | privacy/, terms/ コンテンツ |
 | **P2** | お問い合わせ | contact/ ページ（mailto: リンク） |
+| **P2** | デザイン検証CI | Lighthouse CI + Playwright ビジュアルリグレッションテスト導入 |
 | **P3** | DayRhythm ページ | 開発完了後に Coming Soon → 詳細に切替 |
 | **P3** | コンテンツ拡張 | ブログ、FAQ、スクリーンショットギャラリー |
 
@@ -567,7 +732,7 @@ download:
 | StillMotion App Store説明 | `../StillMotion/docs/apple_store_description.md` |
 | StillMotion 販売計画 | `../StillMotion/docs/sales_plan.md` |
 | StillMotion ローカルサーバー | `../StillMotion/LocalServer/README.md` |
-| StillMotion アイコン | `../StillMotion/StillMotion/Assets.xcassets/AppIcon.appiconset/` |
+| StillMotion アイコン | `assets/images/apps/stillmotion/` |
 | DayRhythm 要件 | `../DayRhythmProject/docs/v2/requirements.md` |
-| DayRhythm アイコン | `../DayRhythmProject/DayRhythm/Assets.xcassets/AppIcon.appiconset/` |
+| DayRhythm アイコン | `assets/images/apps/dayrhythm/` |
 | 個人ブログ設定 | `../frkake.github.io/hugo.toml` |

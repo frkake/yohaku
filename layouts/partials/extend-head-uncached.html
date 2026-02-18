@@ -1,0 +1,15 @@
+{{/* Per-page head elements: JSON-LD structured data
+     This partial receives the full page context (uncached). */}}
+
+{{/* Organization schema on homepage */}}
+{{ if .IsHome }}
+  {{ partial "schema-organization.html" . }}
+{{ end }}
+
+{{/* Breadcrumb schema on all pages */}}
+{{ partial "schema-breadcrumb.html" . }}
+
+{{/* SoftwareApplication schema on app pages */}}
+{{ with .Params.app }}
+  {{ partial "schema-software.html" (dict "app" . "page" $) }}
+{{ end }}

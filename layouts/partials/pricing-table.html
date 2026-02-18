@@ -1,0 +1,45 @@
+{{/* Pricing Table
+     Expects: .pricing (from front matter), .page
+     Data structure:
+       pricing.free: list of included features
+       pricing.full.price: price string
+       pricing.full.extras: list of extra features */}}
+{{ $pricing := .pricing }}
+
+<section class="pricing-section fade-in-up">
+  <h2 class="text-neutral-900 dark:text-neutral">{{ i18n "pricing_title" | default "Pricing" }}</h2>
+
+  {{ with $pricing.full.price }}
+    <p class="pricing-subtitle text-neutral-500 dark:text-neutral-400">{{ . }}</p>
+  {{ end }}
+
+  <table class="pricing-table">
+    <thead>
+      <tr>
+        <th class="text-neutral-900 dark:text-neutral">{{ i18n "feature" | default "Feature" }}</th>
+        <th class="text-neutral-900 dark:text-neutral">{{ i18n "free" | default "Free" }}</th>
+        <th class="text-neutral-900 dark:text-neutral">{{ i18n "full_version" | default "Full Version" }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{/* Free features - included in both */}}
+      {{ range $pricing.free }}
+        <tr>
+          <td class="text-neutral-700 dark:text-neutral-300">{{ . }}</td>
+          <td class="text-neutral-500 dark:text-neutral-400">&#10003;</td>
+          <td class="text-neutral-500 dark:text-neutral-400">&#10003;</td>
+        </tr>
+      {{ end }}
+      {{/* Full-only extras */}}
+      {{ with $pricing.full }}
+        {{ range .extras }}
+          <tr>
+            <td class="text-neutral-700 dark:text-neutral-300">{{ . }}</td>
+            <td class="text-neutral-500 dark:text-neutral-400">&#8212;</td>
+            <td class="text-neutral-500 dark:text-neutral-400">&#10003;</td>
+          </tr>
+        {{ end }}
+      {{ end }}
+    </tbody>
+  </table>
+</section>

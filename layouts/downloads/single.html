@@ -1,0 +1,74 @@
+{{ define "main" }}
+  {{ $download := .Params.download }}
+
+  <article>
+    {{/* Header */}}
+    <header class="content-text" style="padding-top: var(--space-8);">
+      {{ if .Params.showBreadcrumbs | default (site.Params.article.showBreadcrumbs | default false) }}
+        {{ partial "breadcrumbs.html" . }}
+      {{ end }}
+      <h1 class="text-4xl font-extrabold text-neutral-900 dark:text-neutral mt-2">{{ .Title }}</h1>
+      {{ with $download }}
+        {{ with index .releases 0 }}
+          <p class="mt-2 text-neutral-500 dark:text-neutral-400">
+            {{ i18n "version" | default "Version" }} {{ .version }}
+          </p>
+        {{ end }}
+      {{ end }}
+    </header>
+
+    {{/* Overview from markdown */}}
+    {{ with .Content }}
+      <section class="content-text prose dark:prose-invert" style="padding-top: var(--space-6);">
+        {{ . }}
+      </section>
+    {{ end }}
+
+    {{/* Download Table */}}
+    {{ with $download }}
+      {{ range .releases }}
+        <section class="download-section fade-in-up">
+          <table class="download-table">
+            <thead>
+              <tr>
+                <th class="text-neutral-900 dark:text-neutral">{{ i18n "platform" | default "Platform" }}</th>
+                <th class="text-neutral-900 dark:text-neutral">{{ i18n "file" | default "File" }}</th>
+                <th class="text-neutral-900 dark:text-neutral">{{ i18n "size" | default "Size" }}</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range .files }}
+                <tr>
+                  <td class="text-neutral-700 dark:text-neutral-300">{{ .platform }}</td>
+                  <td class="text-neutral-500 dark:text-neutral-400 text-sm">{{ .filename }}</td>
+                  <td class="text-neutral-500 dark:text-neutral-400 text-sm">{{ .size }}</td>
+                  <td>
+                    {{ partial "download-button.html" (dict "url" .url "platform" .platform) }}
+                  </td>
+                </tr>
+              {{ end }}
+            </tbody>
+          </table>
+          {{ with .note }}
+            <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2">{{ . }}</p>
+          {{ end }}
+        </section>
+      {{ end }}
+    {{ end }}
+
+    {{/* Installation Guide */}}
+    {{ with .Params.installationGuide }}
+      <section class="download-section">
+        <details class="setup-guide bg-neutral-50 dark:bg-neutral-800">
+          <summary class="text-neutral-900 dark:text-neutral">{{ i18n "installation_guide" | default "Installation Guide" }}</summary>
+          <ol class="text-neutral-700 dark:text-neutral-300">
+            {{ range . }}
+              <li>{{ . | markdownify }}</li>
+            {{ end }}
+          </ol>
+        </details>
+      </section>
+    {{ end }}
+  </article>
+{{ end }}

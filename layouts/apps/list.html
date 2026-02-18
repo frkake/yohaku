@@ -1,0 +1,25 @@
+{{ define "main" }}
+  <header>
+    {{ if .Params.showBreadcrumbs | default (site.Params.list.showBreadcrumbs | default false) }}
+      {{ partial "breadcrumbs.html" . }}
+    {{ end }}
+    <h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+    {{ with .Params.description }}
+      <p class="mt-2 text-base text-neutral-500 dark:text-neutral-400">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  {{/* App Cards Grid */}}
+  <section class="app-cards">
+    {{ range sort (index .Site.Data.apps) "slug" }}
+      {{ partial "app-card.html" (dict "app" . "site" $.Site) }}
+    {{ end }}
+  </section>
+
+  {{/* Markdown content if any */}}
+  {{ with .Content }}
+    <section class="prose dark:prose-invert mt-8 max-w-prose">
+      {{ . }}
+    </section>
+  {{ end }}
+{{ end }}

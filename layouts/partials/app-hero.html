@@ -1,0 +1,71 @@
+{{/* App Hero Section
+     Expects: .app (from front matter), .page */}}
+{{ $app := .app }}
+{{ $page := .page }}
+{{ $lang := $page.Site.Language.Lang }}
+{{ $tagline := "" }}
+{{ if reflect.IsMap $app.tagline }}
+  {{ $tagline = index $app.tagline $lang | default (index $app.tagline "ja") }}
+{{ else }}
+  {{ $tagline = $app.tagline }}
+{{ end }}
+{{ $status := $app.status | default "released" }}
+
+{{/* Try to get dark icon from data files if not in front matter */}}
+{{ $iconDarkPath := $app.iconDark }}
+{{ if and (not $iconDarkPath) $app.slug }}
+  {{ $dataApp := index $page.Site.Data.apps $app.slug }}
+  {{ with $dataApp }}
+    {{ $iconDarkPath = .iconDark }}
+  {{ end }}
+{{ end }}
+
+<section class="app-hero">
+  {{/* App Icon */}}
+  {{ with $app.icon }}
+    {{ $icon := resources.Get . }}
+    {{ $iconDark := false }}
+    {{ with $iconDarkPath }}
+      {{ $iconDark = resources.Get . }}
+    {{ end }}
+    {{ if and $icon $iconDark }}
+      <picture>
+        <source srcset="{{ $iconDark.RelPermalink }}" media="(prefers-color-scheme: dark)">
+        <img src="{{ $icon.RelPermalink }}" alt="{{ $app.name }}" class="app-hero-icon" width="128" height="128">
+      </picture>
+    {{ else if $icon }}
+      <img src="{{ $icon.RelPermalink }}" alt="{{ $app.name }}" class="app-hero-icon" width="128" height="128">
+    {{ end }}
+  {{ end }}
+
+  {{/* App Name - from front matter or data file */}}
+  {{ $appName := $app.name }}
+  {{ if not $appName }}
+    {{ with $app.slug }}
+      {{ $dataApp := index $page.Site.Data.apps . }}
+      {{ with $dataApp }}
+        {{ $appName = .name }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  <h1 class="text-neutral-900 dark:text-neutral">
+    {{ $appName }}
+    {{ if eq $status "coming_soon" }}
+      <span class="badge-coming-soon bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300">Coming Soon</span>
+    {{ end }}
+  </h1>
+
+  {{/* Tagline */}}
+  {{ with $tagline }}
+    <p class="app-hero-tagline text-neutral-500 dark:text-neutral-400">{{ . }}</p>
+  {{ end }}
+
+  {{/* Platform Badges */}}
+  {{ with $app.platforms }}
+    <div class="platform-badges">
+      {{ range . }}
+        {{ partial "platform-badge.html" (dict "platform" .) }}
+      {{ end }}
+    </div>
+  {{ end }}
+</section>

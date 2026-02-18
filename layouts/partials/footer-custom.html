@@ -1,0 +1,37 @@
+{{/* Custom 3-column footer: Apps | Legal | Connect */}}
+<div class="footer-custom">
+  {{/* Apps Column */}}
+  <div>
+    <h4 class="text-neutral-500 dark:text-neutral-400">Apps</h4>
+    <ul>
+      {{ range sort (index .Site.Data.apps) "slug" }}
+        <li>
+          <a href="{{ printf "/%s/apps/%s/" $.Site.Language.Lang .slug }}">{{ .name }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+
+  {{/* Legal Column */}}
+  <div>
+    <h4 class="text-neutral-500 dark:text-neutral-400">Legal</h4>
+    <ul>
+      <li>
+        <a href="{{ printf "/%s/legal/privacy/" .Site.Language.Lang }}">{{ i18n "privacy_policy" | default "Privacy Policy" }}</a>
+      </li>
+      <li>
+        <a href="{{ printf "/%s/legal/terms/" .Site.Language.Lang }}">{{ i18n "terms_of_use" | default "Terms of Use" }}</a>
+      </li>
+    </ul>
+  </div>
+
+  {{/* Connect Column */}}
+  <div>
+    <h4 class="text-neutral-500 dark:text-neutral-400">Connect</h4>
+    <ul>
+      <li>
+        <a href="{{ printf "/%s/contact/" .Site.Language.Lang }}">{{ i18n "contact" | default "Contact" }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

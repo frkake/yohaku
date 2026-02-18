@@ -1,0 +1,41 @@
+{{/* SoftwareApplication JSON-LD
+     Expects: .app (from front matter), .page */}}
+{{ $app := .app }}
+{{ $page := .page }}
+{{ $lang := $page.Site.Language.Lang }}
+{{ $appName := $app.name }}
+{{ if not $appName }}
+  {{ with $app.slug }}
+    {{ $dataApp := index $page.Site.Data.apps . }}
+    {{ with $dataApp }}
+      {{ $appName = .name }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": {{ $appName | jsonify }},
+  "operatingSystem": {{ delimit ($app.platforms | default slice) ", " | jsonify }},
+  "applicationCategory": "MultimediaApplication",
+  "url": {{ $page.Permalink | jsonify }}
+  {{- with $app.appStoreUrl -}}
+  ,
+  "installUrl": {{ . | jsonify }}
+  {{- end -}}
+  {{- with $app.pricing -}}
+    {{- with .full -}}
+      {{- with .price -}}
+  ,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY"
+  }
+      {{- end -}}
+    {{- end -}}
+  {{- end }}
+}
+</script>
