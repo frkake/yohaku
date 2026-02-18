@@ -1138,3 +1138,24 @@ code, pre {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* =========================================================================
+   Legal Links
+   ========================================================================= */
+.legal-links {
+  text-align: center;
+  padding: var(--space-4) 0 var(--space-6);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  font-size: 0.8125rem;
+}
+
+.legal-links a {
+  color: var(--color-neutral-500);
+  text-decoration: none;
+}
+
+.legal-links a:hover {
+  text-decoration: underline;
+}

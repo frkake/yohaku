@@ -85,6 +85,16 @@
         </section>
       {{ end }}
 
+      {{/* Legal Links */}}
+      {{ $legalPages := where .Pages "Type" "legal" }}
+      {{ with $legalPages }}
+        <section class="legal-links">
+          {{ range . }}
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          {{ end }}
+        </section>
+      {{ end }}
+
     {{ else }}
       {{/* Coming Soon: Teaser only */}}
       {{ with .Content }}

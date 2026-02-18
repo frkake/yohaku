@@ -1,6 +1,7 @@
 ---
 title: "StillMotion - 機能紹介 | iOS/iPadOS/macOS対応メディアビューア"
 description: "RAW、MKV、WebMなど20種類以上のフォーマットに対応。スライドショー、タイル表示、デュアルエンジン動画再生。Dropbox・Google Drive連携。広告なし・買い切り。"
+layout: "single"
 showTableOfContents: false
 app:
   slug: "stillmotion"

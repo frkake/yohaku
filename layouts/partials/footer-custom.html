@@ -1,4 +1,4 @@
-{{/* Custom 3-column footer: Apps | Legal | Connect */}}
+{{/* Custom 2-column footer: Apps | Connect */}}
 <div class="footer-custom">
   {{/* Apps Column */}}
   <div>
@@ -9,19 +9,6 @@
           <a href="{{ printf "/%s/apps/%s/" $.Site.Language.Lang .slug }}">{{ .name }}</a>
         </li>
       {{ end }}
-    </ul>
-  </div>
-
-  {{/* Legal Column */}}
-  <div>
-    <h4 class="text-neutral-500 dark:text-neutral-400">Legal</h4>
-    <ul>
-      <li>
-        <a href="{{ printf "/%s/legal/privacy/" .Site.Language.Lang }}">{{ i18n "privacy_policy" | default "Privacy Policy" }}</a>
-      </li>
-      <li>
-        <a href="{{ printf "/%s/legal/terms/" .Site.Language.Lang }}">{{ i18n "terms_of_use" | default "Terms of Use" }}</a>
-      </li>
     </ul>
   </div>
 
