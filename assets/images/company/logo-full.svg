@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 70">
+  <!-- Symbol mark (brand blue, fixed for both modes) -->
+  <circle cx="18" cy="20" r="8" fill="#4A9ECC"/>
+  <rect x="4" y="50" width="58" height="5" rx="2.5" fill="#4A9ECC"/>
+  <!-- Text (currentColor for dark mode auto-switch) -->
+  <text x="80" y="48"
+        font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif"
+        font-weight="300"
+        font-size="36"
+        letter-spacing="-0.01em"
+        fill="currentColor">yohaku</text>
+</svg>

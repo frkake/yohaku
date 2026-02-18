@@ -45,6 +45,8 @@ theme = "github.com/nunocoracao/blowfish/v2"
   autoSwitchAppearance = true
   enableSearch = false
   enableCodeCopy = false
+  Logo = "images/company/logo-full.svg"
+  disableTextInHeader = true
 
   description = "Less, but better."
   keywords = ["StillMotion", "DayRhythm", "アプリ", "メディアビューア"]

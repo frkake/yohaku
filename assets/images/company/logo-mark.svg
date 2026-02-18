@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- yohaku symbol mark: dot + line -->
+  <circle cx="22" cy="28" r="10" fill="#4A9ECC"/>
+  <rect x="4" y="64" width="72" height="6" rx="3" fill="#4A9ECC"/>
+</svg>
