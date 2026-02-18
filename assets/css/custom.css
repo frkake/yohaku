@@ -601,7 +601,8 @@ code, pre {
   background-color: rgb(245 245 245);
   border: 1px solid rgba(128, 128, 128, 0.15);
   transition: border-color var(--duration-fast) var(--ease-out),
-              background-color var(--duration-fast) var(--ease-out);
+              background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
 }
 
 .dark .dl-platform-pill {
@@ -610,6 +611,13 @@ code, pre {
 
 .dl-platform-pill:hover {
   border-color: rgb(var(--color-primary-500));
+  background-color: rgba(var(--color-primary-500), 0.1);
+  color: rgb(var(--color-primary-600));
+}
+
+.dark .dl-platform-pill:hover {
+  background-color: rgba(var(--color-primary-500), 0.15);
+  color: rgb(var(--color-primary-400));
 }
 
 .dl-platform-pill-icon {
@@ -764,7 +772,8 @@ code, pre {
   text-decoration: none;
   color: inherit;
   background-color: rgb(240 240 240);
-  transition: opacity var(--duration-fast) var(--ease-out);
+  transition: background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
 }
 
 .dark .dl-download-btn {
@@ -772,7 +781,8 @@ code, pre {
 }
 
 .dl-download-btn:hover {
-  opacity: 0.8;
+  background-color: rgb(var(--color-primary-500));
+  color: #fff;
 }
 
 /* =========================================================================
