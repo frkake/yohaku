@@ -28,14 +28,14 @@
     {{ with $iconDarkPath }}
       {{ $iconDark = resources.Get . }}
     {{ end }}
-    {{ if and $icon $iconDark }}
-      <picture>
-        <source srcset="{{ $iconDark.RelPermalink }}" media="(prefers-color-scheme: dark)">
+    <div class="app-hero-icon-wrapper">
+      {{ if and $icon $iconDark }}
+        <img src="{{ $icon.RelPermalink }}" alt="{{ $app.name }}" class="app-hero-icon app-icon-light" width="128" height="128">
+        <img src="{{ $iconDark.RelPermalink }}" alt="{{ $app.name }}" class="app-hero-icon app-icon-dark" width="128" height="128">
+      {{ else if $icon }}
         <img src="{{ $icon.RelPermalink }}" alt="{{ $app.name }}" class="app-hero-icon" width="128" height="128">
-      </picture>
-    {{ else if $icon }}
-      <img src="{{ $icon.RelPermalink }}" alt="{{ $app.name }}" class="app-hero-icon" width="128" height="128">
-    {{ end }}
+      {{ end }}
+    </div>
   {{ end }}
 
   {{/* App Name - from front matter or data file */}}
@@ -48,16 +48,16 @@
       {{ end }}
     {{ end }}
   {{ end }}
-  <h1 class="text-neutral-900 dark:text-neutral">
+  <h1>
     {{ $appName }}
     {{ if eq $status "coming_soon" }}
-      <span class="badge-coming-soon bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300">Coming Soon</span>
+      <span class="badge-coming-soon">Coming Soon</span>
     {{ end }}
   </h1>
 
   {{/* Tagline */}}
   {{ with $tagline }}
-    <p class="app-hero-tagline text-neutral-500 dark:text-neutral-400">{{ . }}</p>
+    <p class="app-hero-tagline">{{ . }}</p>
   {{ end }}
 
   {{/* Platform Badges */}}

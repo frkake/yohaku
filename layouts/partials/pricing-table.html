@@ -7,39 +7,38 @@
 {{ $pricing := .pricing }}
 
 <section class="pricing-section fade-in-up">
-  <h2 class="text-neutral-900 dark:text-neutral">{{ i18n "pricing_title" | default "Pricing" }}</h2>
-
-  {{ with $pricing.full.price }}
-    <p class="pricing-subtitle text-neutral-500 dark:text-neutral-400">{{ . }}</p>
-  {{ end }}
-
-  <table class="pricing-table">
-    <thead>
-      <tr>
-        <th class="text-neutral-900 dark:text-neutral">{{ i18n "feature" | default "Feature" }}</th>
-        <th class="text-neutral-900 dark:text-neutral">{{ i18n "free" | default "Free" }}</th>
-        <th class="text-neutral-900 dark:text-neutral">{{ i18n "full_version" | default "Full Version" }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{/* Free features - included in both */}}
-      {{ range $pricing.free }}
-        <tr>
-          <td class="text-neutral-700 dark:text-neutral-300">{{ . }}</td>
-          <td class="text-neutral-500 dark:text-neutral-400">&#10003;</td>
-          <td class="text-neutral-500 dark:text-neutral-400">&#10003;</td>
-        </tr>
-      {{ end }}
-      {{/* Full-only extras */}}
-      {{ with $pricing.full }}
-        {{ range .extras }}
-          <tr>
-            <td class="text-neutral-700 dark:text-neutral-300">{{ . }}</td>
-            <td class="text-neutral-500 dark:text-neutral-400">&#8212;</td>
-            <td class="text-neutral-500 dark:text-neutral-400">&#10003;</td>
-          </tr>
+  <h2>{{ i18n "pricing_title" | default "Pricing" }}</h2>
+  <div class="pricing-cards">
+    <!-- Free card -->
+    <div class="pricing-card">
+      <div class="pricing-card-header">
+        <h3>{{ i18n "free" | default "Free" }}</h3>
+        <span class="pricing-price">¥0</span>
+      </div>
+      <ul class="pricing-features">
+        {{ range $pricing.free }}
+          <li>{{ . }}</li>
         {{ end }}
-      {{ end }}
-    </tbody>
-  </table>
+      </ul>
+    </div>
+    <!-- Full Version card -->
+    <div class="pricing-card pricing-card-featured">
+      <div class="pricing-card-header">
+        <h3>{{ i18n "full_version" | default "Full Version" }}</h3>
+        {{ with $pricing.full.price }}
+          <span class="pricing-price">{{ . }}</span>
+        {{ end }}
+      </div>
+      <ul class="pricing-features">
+        {{ range $pricing.free }}
+          <li>{{ . }}</li>
+        {{ end }}
+        {{ with $pricing.full }}
+          {{ range .extras }}
+            <li>{{ . }}</li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+  </div>
 </section>

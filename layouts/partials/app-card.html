@@ -5,26 +5,27 @@
 {{ $lang := $site.Language.Lang }}
 {{ $tagline := index $app.tagline $lang | default (index $app.tagline "ja") }}
 
-<a href="{{ printf "/%s/apps/%s/" $lang $app.slug }}" class="app-card bg-neutral-50 dark:bg-neutral-800">
+<a href="{{ printf "/%s/apps/%s/" $lang $app.slug }}" class="app-card">
+  {{ if eq $app.status "coming_soon" }}
+    <span class="app-card-badge">Coming Soon</span>
+  {{ end }}
   {{/* App Icon - dark/light mode */}}
   {{ $icon := resources.Get $app.icon }}
   {{ $iconDark := resources.Get $app.iconDark }}
-  {{ if and $icon $iconDark }}
-    <picture>
-      <source srcset="{{ $iconDark.RelPermalink }}" media="(prefers-color-scheme: dark)">
+  <div class="app-card-icon-wrapper">
+    {{ if and $icon $iconDark }}
+      <img src="{{ $icon.RelPermalink }}" alt="{{ $app.name }}" class="app-card-icon app-icon-light" width="80" height="80" loading="lazy">
+      <img src="{{ $iconDark.RelPermalink }}" alt="{{ $app.name }}" class="app-card-icon app-icon-dark" width="80" height="80" loading="lazy">
+    {{ else if $icon }}
       <img src="{{ $icon.RelPermalink }}" alt="{{ $app.name }}" class="app-card-icon" width="80" height="80" loading="lazy">
-    </picture>
-  {{ else if $icon }}
-    <img src="{{ $icon.RelPermalink }}" alt="{{ $app.name }}" class="app-card-icon" width="80" height="80" loading="lazy">
-  {{ end }}
+    {{ end }}
+  </div>
 
   <div class="app-card-info">
-    <h3 class="text-neutral-900 dark:text-neutral">
-      {{ $app.name }}
-      {{ if eq $app.status "coming_soon" }}
-        <span class="badge-coming-soon bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300">Coming Soon</span>
-      {{ end }}
-    </h3>
-    <p class="text-neutral-500 dark:text-neutral-400">{{ $tagline }}</p>
+    <h3>{{ $app.name }}</h3>
+    <p>{{ $tagline }}</p>
+    {{ with $app.platforms }}
+      <span class="app-card-platforms">{{ delimit . " / " }}</span>
+    {{ end }}
   </div>
 </a>
