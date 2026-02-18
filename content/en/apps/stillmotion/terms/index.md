@@ -7,7 +7,7 @@ showDate: true
 showReadingTime: false
 ---
 
-These Terms of Use ("Terms") govern your use of the application "StillMotion" ("the App") provided by yohaku ("we", "our"). By using the App, you agree to these Terms.
+These Terms of Use ("Terms") govern your use of the application "StillMotion" ("the App"). By using the App, you agree to these Terms.
 
 ### The App
 

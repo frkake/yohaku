@@ -7,7 +7,7 @@ showDate: true
 showReadingTime: false
 ---
 
-yohaku ("we", "our") respects your privacy and is committed to protecting your personal information when you use our application "StillMotion" ("the App").
+We respect your privacy and are committed to protecting your personal information when you use our application "StillMotion" ("the App").
 
 ### Information We Collect
 
