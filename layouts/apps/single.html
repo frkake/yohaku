@@ -3,17 +3,10 @@
   {{ $status := $app.status | default "released" }}
 
   <article class="app-page">
-    {{/* App Hero */}}
-    {{ partial "app-hero.html" (dict "app" $app "page" .) }}
+    {{/* App Hero (includes App Store badge for returning users) */}}
+    {{ partial "app-hero.html" (dict "app" $app "page" . "appStoreUrl" $app.appStoreUrl) }}
 
     {{ if eq $status "released" }}
-      {{/* CTA Primary */}}
-      {{ with $app.appStoreUrl }}
-        <section class="cta-section">
-          {{ partial "app-store-badge.html" (dict "url" . "page" $) }}
-        </section>
-      {{ end }}
-
       {{/* Overview - rendered from markdown content */}}
       {{ with .Content }}
         <section class="content-text prose dark:prose-invert fade-in-up">
@@ -34,15 +27,14 @@
         </section>
       {{ end }}
 
-      {{/* Pricing */}}
+      {{/* Pricing (includes App Store badge as decision-point CTA) */}}
       {{ with $app.pricing }}
         <hr class="app-section-divider">
-        {{ partial "pricing-table.html" (dict "pricing" . "page" $) }}
+        {{ partial "pricing-table.html" (dict "pricing" . "page" $ "appStoreUrl" $app.appStoreUrl) }}
       {{ end }}
 
       {{/* Local Server */}}
       {{ with $app.localServer }}
-        <hr class="app-section-divider">
         <section class="content-text fade-in-up">
           <div class="local-server-card">
             <div class="local-server-content">
@@ -78,9 +70,9 @@
         </section>
       {{ end }}
 
-      {{/* CTA Secondary */}}
+      {{/* CTA Closing (for users who read everything) */}}
       {{ with $app.appStoreUrl }}
-        <section class="cta-section fade-in-up">
+        <section class="cta-closing fade-in-up">
           {{ partial "app-store-badge.html" (dict "url" . "page" $) }}
         </section>
       {{ end }}

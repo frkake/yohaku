@@ -297,6 +297,20 @@ code, pre {
   opacity: 0.8;
 }
 
+.app-hero-cta {
+  margin-top: var(--space-5);
+}
+
+.pricing-cta {
+  text-align: center;
+  margin-top: var(--space-6);
+}
+
+.cta-closing {
+  text-align: center;
+  padding: var(--space-6) 0;
+}
+
 /* =========================================================================
    Features Grid
    ========================================================================= */

@@ -41,4 +41,11 @@
       </ul>
     </div>
   </div>
+
+  {{/* App Store Badge (decision point for new users) */}}
+  {{ with .appStoreUrl }}
+    <div class="pricing-cta">
+      {{ partial "app-store-badge.html" (dict "url" . "page" $.page) }}
+    </div>
+  {{ end }}
 </section>

@@ -68,4 +68,11 @@
       {{ end }}
     </div>
   {{ end }}
+
+  {{/* App Store Badge (for returning users) */}}
+  {{ with .appStoreUrl }}
+    <div class="app-hero-cta">
+      {{ partial "app-store-badge.html" (dict "url" . "page" $page) }}
+    </div>
+  {{ end }}
 </section>
