@@ -288,8 +288,12 @@ code, pre {
 
 .app-store-badge {
   display: inline-block;
-  height: 48px;
   transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.app-store-badge img {
+  height: 48px;
+  width: auto;
 }
 
 .app-store-badge:hover {
