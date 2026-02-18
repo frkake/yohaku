@@ -6,23 +6,29 @@ import json
 import os
 
 
-# (platform, filename_template, noteKey)
+# (os_name, arch, filename_template, noteKey, recommended)
 # {version} in filename_template is replaced with the actual version
-FILE_DEFS = [
-    ("macOS (Apple Silicon)", "StillMotion-Server-{version}.dmg",
-     "note_dmg_installer"),
-    ("macOS (Apple Silicon)", "stillmotion-server-darwin-arm64",
-     "note_cli_binary"),
-    ("macOS (Intel)", "stillmotion-server-darwin-amd64",
-     "note_cli_binary"),
-    ("Linux (x86_64)", "stillmotion-server-linux-amd64",
-     "note_cli_binary"),
-    ("Linux (ARM64)", "stillmotion-server-linux-arm64",
-     "note_raspberry_pi"),
-    ("Windows (x86_64)", "stillmotion-server-windows-amd64.exe",
-     "note_doubleclick"),
-    ("Windows (ARM64)", "stillmotion-server-windows-arm64.exe",
-     "note_doubleclick"),
+PLATFORM_DEFS = [
+    ("macOS", [
+        ("Apple Silicon", "StillMotion-Server-{version}.dmg",
+         "note_dmg_installer", True),
+        ("Apple Silicon", "stillmotion-server-darwin-arm64",
+         "note_cli_binary", False),
+        ("Intel", "stillmotion-server-darwin-amd64",
+         "note_cli_binary", False),
+    ]),
+    ("Linux", [
+        ("x86_64", "stillmotion-server-linux-amd64",
+         "note_cli_binary", False),
+        ("ARM64", "stillmotion-server-linux-arm64",
+         "note_raspberry_pi", False),
+    ]),
+    ("Windows", [
+        ("x86_64", "stillmotion-server-windows-amd64.exe",
+         "note_doubleclick", False),
+        ("ARM64", "stillmotion-server-windows-arm64.exe",
+         "note_doubleclick", False),
+    ]),
 ]
 
 
@@ -40,18 +46,25 @@ def build_data_file(version, tag, repo, sizes):
         "releases:",
         f"  - version: {yaml_quote(version)}",
         f"    tag: {yaml_quote(tag)}",
-        "    files:",
+        "    platforms:",
     ]
 
-    for platform, fn_template, note_key in FILE_DEFS:
-        filename = fn_template.format(version=version)
-        size = sizes.get(filename, "")
+    for os_name, file_defs in PLATFORM_DEFS:
         lines.extend([
-            f"      - platform: {yaml_quote(platform)}",
-            f"        filename: {yaml_quote(filename)}",
-            f"        size: {yaml_quote(size)}",
-            f"        noteKey: {yaml_quote(note_key)}",
+            f"      - os: {yaml_quote(os_name)}",
+            "        files:",
         ])
+        for arch, fn_template, note_key, recommended in file_defs:
+            filename = fn_template.format(version=version)
+            size = sizes.get(filename, "")
+            lines.extend([
+                f"          - arch: {yaml_quote(arch)}",
+                f"            filename: {yaml_quote(filename)}",
+                f"            size: {yaml_quote(size)}",
+                f"            noteKey: {yaml_quote(note_key)}",
+            ])
+            if recommended:
+                lines.append("            recommended: true")
 
     return "\n".join(lines) + "\n"
 

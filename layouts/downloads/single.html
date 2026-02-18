@@ -1,80 +1,137 @@
 {{ define "main" }}
   {{ $dataKey := .Params.downloadDataKey }}
   {{ $download := index site.Data.downloads $dataKey }}
+  {{ $appSlug := $download.appSlug }}
+  {{ $appData := index site.Data.apps $appSlug }}
+  {{ $release := index $download.releases 0 }}
+  {{ $repo := $download.repo }}
+  {{ $tag := $release.tag }}
 
   <article>
-    {{/* Header */}}
-    <header class="content-text" style="padding-top: var(--space-8);">
-      {{ if .Params.showBreadcrumbs | default (site.Params.article.showBreadcrumbs | default false) }}
-        {{ partial "breadcrumbs.html" . }}
-      {{ end }}
-      <h1 class="text-4xl font-extrabold text-neutral-900 dark:text-neutral mt-2">{{ .Title }}</h1>
-      {{ with $download }}
-        {{ with index .releases 0 }}
-          <p class="mt-2 text-neutral-500 dark:text-neutral-400">
-            {{ i18n "version" | default "Version" }} {{ .version }}
-          </p>
+    {{/* ===== Hero Section ===== */}}
+    <section class="dl-hero">
+      {{/* App Icon */}}
+      {{ with $appData }}
+        {{ $icon := resources.Get .icon }}
+        {{ $iconDark := false }}
+        {{ with .iconDark }}
+          {{ $iconDark = resources.Get . }}
+        {{ end }}
+        {{ if and $icon $iconDark }}
+          <img src="{{ $icon.RelPermalink }}" alt="{{ .name }}" class="dl-hero-icon app-icon-light" width="96" height="96">
+          <img src="{{ $iconDark.RelPermalink }}" alt="{{ .name }}" class="dl-hero-icon app-icon-dark" width="96" height="96">
+        {{ else if $icon }}
+          <img src="{{ $icon.RelPermalink }}" alt="{{ .name }}" class="dl-hero-icon" width="96" height="96">
         {{ end }}
       {{ end }}
-    </header>
 
-    {{/* Overview from markdown */}}
-    {{ with .Content }}
-      <section class="content-text prose dark:prose-invert" style="padding-top: var(--space-6);">
-        {{ . }}
+      <h1 class="dl-hero-title">{{ .Title }}</h1>
+
+      <span class="dl-version-badge">v{{ $release.version }}</span>
+
+      {{/* Overview from markdown content */}}
+      {{ with .Content }}
+        <p class="dl-hero-tagline">{{ . | plainify }}</p>
+      {{ end }}
+
+      {{/* Platform Quick Nav */}}
+      <nav class="dl-platform-nav">
+        {{ range $release.platforms }}
+          <a href="#dl-{{ .os | urlize }}" class="dl-platform-pill">
+            <span class="dl-platform-pill-icon">{{ partial "platform-icon.html" .os }}</span>
+            {{ .os }}
+          </a>
+        {{ end }}
+      </nav>
+    </section>
+
+    {{/* ===== Platform Download Cards ===== */}}
+    <section class="dl-platforms">
+      {{ range $release.platforms }}
+        {{ $os := .os }}
+        <div class="dl-platform-card" id="dl-{{ .os | urlize }}">
+          <div class="dl-platform-card-header">
+            <span class="dl-platform-card-icon">{{ partial "platform-icon.html" .os }}</span>
+            <h2>{{ .os }}</h2>
+          </div>
+          <div class="dl-platform-card-body">
+            {{ range .files }}
+              {{ $url := printf "https://github.com/%s/releases/download/%s/%s" $repo $tag .filename }}
+              <div class="dl-file-row">
+                <div class="dl-file-info">
+                  <span class="dl-file-arch">
+                    {{ .arch }}
+                    {{ if .recommended }}
+                      <span class="dl-file-recommended-badge">{{ i18n "recommended" | default "Recommended" }}</span>
+                    {{ end }}
+                  </span>
+                  <span class="dl-file-name">{{ .filename }}</span>
+                  {{ with .noteKey }}
+                    <span class="dl-file-note">{{ i18n . }}</span>
+                  {{ end }}
+                </div>
+                <div class="dl-file-meta">
+                  <span class="dl-file-size">{{ .size }}</span>
+                  <a href="{{ $url }}" class="dl-download-btn" download>
+                    {{ i18n "download" | default "Download" }}
+                  </a>
+                </div>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </section>
+
+    {{/* ===== Features Section ===== */}}
+    {{ with .Params.features }}
+      <section class="dl-features fade-in-up">
+        <h2>{{ i18n "features_title" | default "Features" }}</h2>
+        <div class="dl-features-grid">
+          {{ range . }}
+            <div class="dl-feature-item">
+              <div class="dl-feature-icon">
+                {{ partial "feature-icon.html" .icon }}
+              </div>
+              <h3>{{ .title }}</h3>
+              <p>{{ .description }}</p>
+            </div>
+          {{ end }}
+        </div>
       </section>
     {{ end }}
 
-    {{/* Download Table */}}
-    {{ with $download }}
-      {{ $repo := .repo }}
-      {{ range .releases }}
-        {{ $tag := .tag }}
-        <section class="download-section fade-in-up">
-          <table class="download-table">
-            <thead>
-              <tr>
-                <th class="text-neutral-900 dark:text-neutral">{{ i18n "platform" | default "Platform" }}</th>
-                <th class="text-neutral-900 dark:text-neutral">{{ i18n "file" | default "File" }}</th>
-                <th class="text-neutral-900 dark:text-neutral">{{ i18n "size" | default "Size" }}</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {{ range .files }}
-                {{ $url := printf "https://github.com/%s/releases/download/%s/%s" $repo $tag .filename }}
-                <tr>
-                  <td class="text-neutral-700 dark:text-neutral-300">{{ .platform }}</td>
-                  <td class="text-neutral-500 dark:text-neutral-400 text-sm">
-                    {{ .filename }}
-                    {{ with .noteKey }}<br><span class="text-xs">{{ i18n . }}</span>{{ end }}
-                  </td>
-                  <td class="text-neutral-500 dark:text-neutral-400 text-sm">{{ .size }}</td>
-                  <td>
-                    {{ partial "download-button.html" (dict "url" $url "platform" .platform) }}
-                  </td>
-                </tr>
-              {{ end }}
-            </tbody>
-          </table>
-          {{ with .note }}
-            <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-2">{{ . }}</p>
+    {{/* ===== Setup Guide ===== */}}
+    {{ with .Params.installationGuide }}
+      <section class="dl-setup fade-in-up">
+        <h2>{{ i18n "installation_guide" | default "Setup Guide" }}</h2>
+        <div class="dl-setup-steps">
+          {{ range $index, $step := . }}
+            <div class="dl-setup-step">
+              <span class="dl-setup-number">{{ add $index 1 }}</span>
+              <span class="dl-setup-text">{{ $step | markdownify }}</span>
+            </div>
           {{ end }}
-        </section>
-      {{ end }}
+        </div>
+      </section>
     {{ end }}
 
-    {{/* Installation Guide */}}
-    {{ with .Params.installationGuide }}
-      <section class="download-section">
-        <details class="setup-guide bg-neutral-50 dark:bg-neutral-800">
-          <summary class="text-neutral-900 dark:text-neutral">{{ i18n "installation_guide" | default "Installation Guide" }}</summary>
-          <ol class="text-neutral-700 dark:text-neutral-300">
-            {{ range . }}
-              <li>{{ . | markdownify }}</li>
-            {{ end }}
-          </ol>
-        </details>
+    {{/* ===== ffmpeg Note ===== */}}
+    {{ with .Params.ffmpegNote }}
+      <section class="dl-note-section fade-in-up">
+        <div class="dl-note-card">
+          <div class="dl-note-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 16v-4"/>
+              <path d="M12 8h.01"/>
+            </svg>
+          </div>
+          <div class="dl-note-content">
+            <h3>{{ i18n "ffmpeg_note_title" | default "About ffmpeg" }}</h3>
+            <p>{{ . }}</p>
+          </div>
+        </div>
       </section>
     {{ end }}
   </article>

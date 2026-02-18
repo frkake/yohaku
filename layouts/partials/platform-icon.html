@@ -1,0 +1,22 @@
+{{/* Platform Icon - Returns inline SVG for OS name
+     Expects: string "macOS", "Linux", or "Windows" */}}
+{{ $os := . }}
+{{ if eq $os "macOS" }}
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 4-6 4-10 0-3.5-2-5-4-5-1.2 0-2.27.68-3 1.27C12.27 7.68 11.2 7 10 7c-2 0-4 1.5-4 5 0 4 1 10 4 10 1.25 0 2.5-1.06 4-1.06z"/>
+    <path d="M10 2c1 .5 2 2 2 5"/>
+  </svg>
+{{ else if eq $os "Linux" }}
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="11" r="1"/>
+    <path d="M11 17a1 1 0 0 1 2 0c0 .5-.34 3-.5 4.5a.5.5 0 0 1-1 0c-.16-1.5-.5-4-.5-4.5Z"/>
+    <path d="M8 14a5 5 0 1 1 8 0"/>
+    <path d="M17 18.5a9 9 0 1 0-10 0"/>
+  </svg>
+{{ else if eq $os "Windows" }}
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="3" width="20" height="14" rx="2"/>
+    <line x1="8" y1="21" x2="16" y2="21"/>
+    <line x1="12" y1="17" x2="12" y2="21"/>
+  </svg>
+{{ end }}

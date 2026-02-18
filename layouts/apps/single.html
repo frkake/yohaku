@@ -43,14 +43,38 @@
       {{/* Local Server */}}
       {{ with $app.localServer }}
         <hr class="app-section-divider">
-        <section class="content-text fade-in-up local-server-section">
-          <h2>{{ .title | default (i18n "local_server" | default "Local Server") }}</h2>
-          <p>{{ .description }}</p>
-          {{ with .downloadUrl }}
-            <a href="{{ . }}" class="download-btn">
-              {{ i18n "download" | default "Download" }}
-            </a>
-          {{ end }}
+        <section class="content-text fade-in-up">
+          <div class="local-server-card">
+            <div class="local-server-content">
+              <span class="local-server-badge">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="4 17 10 11 4 5"/>
+                  <line x1="12" y1="19" x2="20" y2="19"/>
+                </svg>
+                {{ i18n "local_server" | default "Local Server" }}
+              </span>
+              <h2>{{ .title | default (i18n "local_server" | default "Local Server") }}</h2>
+              <p>{{ .description }}</p>
+              <div class="local-server-highlights">
+                <span>macOS</span>
+                <span>Linux</span>
+                <span>Windows</span>
+                <span>{{ i18n "free" | default "Free" }}</span>
+              </div>
+            </div>
+            {{ with .downloadUrl }}
+              <div class="local-server-action">
+                <a href="{{ . }}" class="local-server-download-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  {{ i18n "download_now" | default "Download Now" }}
+                </a>
+              </div>
+            {{ end }}
+          </div>
         </section>
       {{ end }}
 
