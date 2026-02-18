@@ -98,7 +98,7 @@ theme = "github.com/nunocoracao/blowfish/v2"
     [languages.ja.params]
       displayName = "JA"
       isoCode = "ja"
-      description = "Less, but better."
+      description = "引き算の美学"
 
     [[languages.ja.menus.main]]
       name = "Apps"
