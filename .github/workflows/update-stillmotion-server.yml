@@ -1,0 +1,129 @@
+name: Update StillMotion Server Release
+
+on:
+  repository_dispatch:
+    types: [stillmotion-server-update]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "stillmotion-server-update"
+  cancel-in-progress: false
+
+jobs:
+  update-release:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.STILLMOTION_CI_REPO_PAT }}
+
+      - name: Extract payload
+        id: payload
+        env:
+          VERSION: ${{ github.event.client_payload.version }}
+          COMBINED_HASH: ${{ github.event.client_payload.combined_hash }}
+          SOURCE_RUN_ID: ${{ github.event.client_payload.source_run_id }}
+        run: |
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "combined_hash=$COMBINED_HASH" >> "$GITHUB_OUTPUT"
+          echo "source_run_id=$SOURCE_RUN_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Check for changes
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.STILLMOTION_CI_REPO_PAT }}
+        run: |
+          TAG="stillmotion-server-v${{ steps.payload.outputs.version }}"
+          COMBINED_HASH="${{ steps.payload.outputs.combined_hash }}"
+
+          # Try to get existing checksums from release
+          EXISTING_HASH=""
+          if gh release view "$TAG" &>/dev/null; then
+            mkdir -p /tmp/existing
+            if gh release download "$TAG" --pattern "checksums.sha256" --dir /tmp/existing 2>/dev/null; then
+              EXISTING_HASH=$(sha256sum /tmp/existing/checksums.sha256 | cut -d' ' -f1)
+            fi
+          fi
+
+          if [ "$EXISTING_HASH" = "$COMBINED_HASH" ]; then
+            echo "No changes detected (hash match: $COMBINED_HASH)"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected (existing: $EXISTING_HASH, new: $COMBINED_HASH)"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Download artifacts from StillMotion
+        if: steps.check.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.STILLMOTION_CI_REPO_PAT }}
+        run: |
+          mkdir -p /tmp/release-assets
+          gh run download "${{ steps.payload.outputs.source_run_id }}" \
+            --repo frkake/StillMotion \
+            --name stillmotion-server-binaries \
+            --dir /tmp/release-assets
+
+      - name: Prepare checksums file
+        if: steps.check.outputs.changed == 'true'
+        env:
+          CHECKSUMS_B64: ${{ github.event.client_payload.checksums_b64 }}
+        run: |
+          echo "$CHECKSUMS_B64" | base64 -d > /tmp/release-assets/checksums.sha256
+
+      - name: Create/Update Release
+        if: steps.check.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.STILLMOTION_CI_REPO_PAT }}
+        run: |
+          TAG="${{ steps.check.outputs.tag }}"
+          VERSION="${{ steps.payload.outputs.version }}"
+
+          # Create release if it doesn't exist
+          if ! gh release view "$TAG" &>/dev/null; then
+            gh release create "$TAG" \
+              --title "StillMotion Server v${VERSION}" \
+              --notes "StillMotion Local Server v${VERSION}"
+          fi
+
+          # Upload/overwrite assets
+          gh release upload "$TAG" --clobber /tmp/release-assets/*
+
+      - name: Update download pages
+        if: steps.check.outputs.changed == 'true'
+        env:
+          SIZES_JSON: ${{ github.event.client_payload.sizes_json }}
+        run: |
+          python3 scripts/update-download-page.py \
+            --version "${{ steps.payload.outputs.version }}" \
+            --sizes "$SIZES_JSON" \
+            --repo "${{ github.repository }}" \
+            --tag "${{ steps.check.outputs.tag }}"
+
+      - name: Commit and push
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/
+          git diff --staged --quiet && exit 0
+          git commit -m "chore: update StillMotion Server to v${{ steps.payload.outputs.version }}"
+          git push
+
+  deploy:
+    needs: update-release
+    if: needs.update-release.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      contents: read
+      pages: write
+      id-token: write

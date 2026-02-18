@@ -10,3 +10,5 @@ node_modules/
 
 # Binary releases (uploaded to GitHub Releases, not tracked in git)
 releases/
+
+.DS_Store
