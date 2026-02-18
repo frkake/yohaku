@@ -6,9 +6,6 @@
 {{ $tagline := index $app.tagline $lang | default (index $app.tagline "ja") }}
 
 <a href="{{ printf "/%s/apps/%s/" $lang $app.slug }}" class="app-card">
-  {{ if eq $app.status "coming_soon" }}
-    <span class="app-card-badge">Coming Soon</span>
-  {{ end }}
   {{/* App Icon - dark/light mode */}}
   {{ $icon := resources.Get $app.icon }}
   {{ $iconDark := resources.Get $app.iconDark }}
@@ -22,7 +19,7 @@
   </div>
 
   <div class="app-card-info">
-    <h3>{{ $app.name }}</h3>
+    <h3>{{ $app.name }}{{ if eq $app.status "coming_soon" }} <span class="app-card-badge">Coming Soon</span>{{ end }}</h3>
     <p>{{ $tagline }}</p>
     {{ with $app.platforms }}
       <span class="app-card-platforms">{{ delimit . " / " }}</span>
