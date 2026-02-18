@@ -70,13 +70,6 @@
         </section>
       {{ end }}
 
-      {{/* CTA Closing (for users who read everything) */}}
-      {{ with $app.appStoreUrl }}
-        <section class="cta-closing fade-in-up">
-          {{ partial "app-store-badge.html" (dict "url" . "page" $) }}
-        </section>
-      {{ end }}
-
       {{/* Legal Links */}}
       {{ $legalPages := where .Pages "Type" "legal" }}
       {{ with $legalPages }}
