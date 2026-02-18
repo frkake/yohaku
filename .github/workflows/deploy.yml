@@ -66,6 +66,43 @@ jobs:
           key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-hugomod-
 
+      - name: Sync StillMotion Server release data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=$(gh release list --json tagName \
+            --jq '[.[] | select(.tagName | startswith("stillmotion-server-v"))][0].tagName // empty')
+
+          if [ -z "$TAG" ]; then
+            echo "No StillMotion Server release found, skipping sync"
+            exit 0
+          fi
+
+          VERSION="${TAG#stillmotion-server-v}"
+          echo "Syncing release: $TAG (version: $VERSION)"
+
+          SIZES_JSON=$(gh release view "$TAG" --json assets --jq '.assets' | python3 -c "
+          import json, sys
+          assets = json.load(sys.stdin)
+          sizes = {}
+          for a in assets:
+              name = a['name']
+              if name == 'checksums.sha256':
+                  continue
+              size = a['size']
+              if size >= 1024 * 1024:
+                  sizes[name] = f'{size / 1024 / 1024:.1f}MB'
+              else:
+                  sizes[name] = f'{size / 1024:.0f}KB'
+          print(json.dumps(sizes))
+          ")
+
+          python3 scripts/update-download-page.py \
+            --version "$VERSION" \
+            --sizes "$SIZES_JSON" \
+            --repo "${{ github.repository }}" \
+            --tag "$TAG"
+
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: /tmp/hugo_cache
