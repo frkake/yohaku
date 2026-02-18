@@ -1,6 +1,6 @@
 ---
 title: "Contact"
-description: "Contact Less is More"
+description: "Contact yohaku"
 showDate: false
 showReadingTime: false
 ---

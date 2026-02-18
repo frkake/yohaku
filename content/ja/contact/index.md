@@ -1,6 +1,6 @@
 ---
 title: "お問い合わせ"
-description: "Less is More へのお問い合わせ"
+description: "yohaku へのお問い合わせ"
 showDate: false
 showReadingTime: false
 ---

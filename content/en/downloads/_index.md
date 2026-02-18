@@ -1,6 +1,6 @@
 ---
 title: "Downloads"
-description: "Software downloads from Less is More"
+description: "Software downloads from yohaku"
 cascade:
   showDate: false
   showReadingTime: false

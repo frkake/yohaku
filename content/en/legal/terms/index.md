@@ -1,6 +1,6 @@
 ---
 title: "Terms of Use"
-description: "Less is More Terms of Use"
+description: "yohaku Terms of Use"
 date: 2025-02-18
 showDate: true
 showReadingTime: false
@@ -10,7 +10,7 @@ showReadingTime: false
 
 Last updated: February 18, 2025
 
-These Terms of Use ("Terms") govern your use of applications and the website ("the Service") provided by Less is More ("we", "our"). By using the Service, you agree to these Terms.
+These Terms of Use ("Terms") govern your use of applications and the website ("the Service") provided by yohaku ("we", "our"). By using the Service, you agree to these Terms.
 
 ### The Service
 

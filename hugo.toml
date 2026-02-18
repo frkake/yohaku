@@ -94,6 +94,8 @@ theme = "github.com/nunocoracao/blowfish/v2"
     languageName = "日本語"
     contentDir = "content/ja"
     [languages.ja.params]
+      displayName = "JA"
+      isoCode = "ja"
       description = "Less, but better."
 
     [[languages.ja.menus.main]]
@@ -113,6 +115,8 @@ theme = "github.com/nunocoracao/blowfish/v2"
     languageName = "English"
     contentDir = "content/en"
     [languages.en.params]
+      displayName = "EN"
+      isoCode = "en"
       description = "Less, but better."
 
     [[languages.en.menus.main]]

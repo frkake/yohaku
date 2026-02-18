@@ -1,6 +1,6 @@
 ---
 title: "Apps"
-description: "Applications by Less is More"
+description: "Applications by yohaku"
 cascade:
   showDate: false
   showReadingTime: false

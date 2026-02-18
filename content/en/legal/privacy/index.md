@@ -1,6 +1,6 @@
 ---
 title: "Privacy Policy"
-description: "Less is More Privacy Policy"
+description: "yohaku Privacy Policy"
 date: 2025-02-18
 showDate: true
 showReadingTime: false
@@ -10,7 +10,7 @@ showReadingTime: false
 
 Last updated: February 18, 2025
 
-Less is More ("we", "our") respects your privacy and is committed to protecting your personal information when you use our applications and website ("the Service").
+yohaku ("we", "our") respects your privacy and is committed to protecting your personal information when you use our applications and website ("the Service").
 
 ### Information We Collect
 
