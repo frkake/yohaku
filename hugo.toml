@@ -1,7 +1,7 @@
 # =============================================================================
 # Less is More - Hugo Configuration
 # =============================================================================
-baseURL = "https://example.com/"
+baseURL = "https://less-is-more.ai/"
 languageCode = "ja"
 defaultContentLanguage = "ja"
 defaultContentLanguageInSubdir = true
