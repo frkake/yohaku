@@ -1,5 +1,6 @@
 {{ define "main" }}
-  {{ $download := .Params.download }}
+  {{ $dataKey := .Params.downloadDataKey }}
+  {{ $download := index site.Data.downloads $dataKey }}
 
   <article>
     {{/* Header */}}
@@ -26,7 +27,9 @@
 
     {{/* Download Table */}}
     {{ with $download }}
+      {{ $repo := .repo }}
       {{ range .releases }}
+        {{ $tag := .tag }}
         <section class="download-section fade-in-up">
           <table class="download-table">
             <thead>
@@ -39,12 +42,16 @@
             </thead>
             <tbody>
               {{ range .files }}
+                {{ $url := printf "https://github.com/%s/releases/download/%s/%s" $repo $tag .filename }}
                 <tr>
                   <td class="text-neutral-700 dark:text-neutral-300">{{ .platform }}</td>
-                  <td class="text-neutral-500 dark:text-neutral-400 text-sm">{{ .filename }}</td>
+                  <td class="text-neutral-500 dark:text-neutral-400 text-sm">
+                    {{ .filename }}
+                    {{ with .noteKey }}<br><span class="text-xs">{{ i18n . }}</span>{{ end }}
+                  </td>
                   <td class="text-neutral-500 dark:text-neutral-400 text-sm">{{ .size }}</td>
                   <td>
-                    {{ partial "download-button.html" (dict "url" .url "platform" .platform) }}
+                    {{ partial "download-button.html" (dict "url" $url "platform" .platform) }}
                   </td>
                 </tr>
               {{ end }}

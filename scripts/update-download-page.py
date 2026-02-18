@@ -1,29 +1,28 @@
 #!/usr/bin/env python3
-"""Update StillMotion Server download pages with new version/size/URL info."""
+"""Update StillMotion Server data file with new version/size info."""
 
 import argparse
 import json
 import os
-import re
 
 
-# (platform, filename_template, note_ja, note_en)
+# (platform, filename_template, noteKey)
 # {version} in filename_template is replaced with the actual version
 FILE_DEFS = [
     ("macOS (Apple Silicon)", "StillMotion-Server-{version}.dmg",
-     "推奨。DMGインストーラー", "Recommended. DMG installer"),
+     "note_dmg_installer"),
     ("macOS (Apple Silicon)", "stillmotion-server-darwin-arm64",
-     "CLI バイナリ", "CLI binary"),
+     "note_cli_binary"),
     ("macOS (Intel)", "stillmotion-server-darwin-amd64",
-     "CLI バイナリ", "CLI binary"),
+     "note_cli_binary"),
     ("Linux (x86_64)", "stillmotion-server-linux-amd64",
-     "CLI バイナリ", "CLI binary"),
+     "note_cli_binary"),
     ("Linux (ARM64)", "stillmotion-server-linux-arm64",
-     "Raspberry Pi 等", "Raspberry Pi, etc."),
+     "note_raspberry_pi"),
     ("Windows (x86_64)", "stillmotion-server-windows-amd64.exe",
-     "ダブルクリックで起動", "Double-click to run"),
+     "note_doubleclick"),
     ("Windows (ARM64)", "stillmotion-server-windows-arm64.exe",
-     "ダブルクリックで起動", "Double-click to run"),
+     "note_doubleclick"),
 ]
 
 
@@ -32,72 +31,34 @@ def yaml_quote(s):
     return f'"{s}"'
 
 
-def build_front_matter(title, description, version, tag, repo, sizes, lang):
-    """Build YAML front matter string."""
-    base_url = f"https://github.com/{repo}/releases/download/{tag}"
-
+def build_data_file(version, tag, repo, sizes):
+    """Build YAML data file string."""
     lines = [
-        "---",
-        f"title: {yaml_quote(title)}",
-        f"description: {yaml_quote(description)}",
-        "download:",
-        f"  appSlug: {yaml_quote('stillmotion')}",
-        "  releases:",
-        f"    - version: {yaml_quote(version)}",
-        f"      githubRelease: {yaml_quote(tag)}",
-        "      files:",
+        "# CI-managed -- do not edit manually",
+        f"appSlug: {yaml_quote('stillmotion')}",
+        f"repo: {yaml_quote(repo)}",
+        "releases:",
+        f"  - version: {yaml_quote(version)}",
+        f"    tag: {yaml_quote(tag)}",
+        "    files:",
     ]
 
-    for platform, fn_template, note_ja, note_en in FILE_DEFS:
+    for platform, fn_template, note_key in FILE_DEFS:
         filename = fn_template.format(version=version)
-        note = note_ja if lang == "ja" else note_en
         size = sizes.get(filename, "")
-        url = f"{base_url}/{filename}"
         lines.extend([
-            f"        - platform: {yaml_quote(platform)}",
-            f"          filename: {yaml_quote(filename)}",
-            f"          url: {yaml_quote(url)}",
-            f"          size: {yaml_quote(size)}",
-            f"          note: {yaml_quote(note)}",
+            f"      - platform: {yaml_quote(platform)}",
+            f"        filename: {yaml_quote(filename)}",
+            f"        size: {yaml_quote(size)}",
+            f"        noteKey: {yaml_quote(note_key)}",
         ])
 
-    lines.append("---")
-    return "\n".join(lines)
-
-
-def update_file(filepath, version, tag, repo, sizes, lang):
-    """Update a single download page file."""
-    with open(filepath, "r") as f:
-        content = f.read()
-
-    # Split on "---" to get front matter and body
-    parts = content.split("---", 2)
-    if len(parts) < 3:
-        raise ValueError(f"Invalid front matter in {filepath}")
-
-    body = parts[2]  # Everything after second ---
-
-    # Extract title and description from existing front matter
-    fm = parts[1]
-    title_match = re.search(r'title:\s*"(.+?)"', fm)
-    desc_match = re.search(r'description:\s*"(.+?)"', fm)
-
-    title = title_match.group(1) if title_match else ""
-    description = desc_match.group(1) if desc_match else ""
-
-    new_front_matter = build_front_matter(
-        title, description, version, tag, repo, sizes, lang
-    )
-
-    with open(filepath, "w") as f:
-        f.write(new_front_matter + body)
-
-    print(f"  Updated: {filepath}")
+    return "\n".join(lines) + "\n"
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Update StillMotion Server download pages"
+        description="Update StillMotion Server data file"
     )
     parser.add_argument("--version", required=True,
                         help="Version number (e.g. 1.1)")
@@ -114,14 +75,17 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
 
-    for lang in ("ja", "en"):
-        filepath = os.path.join(
-            project_root, "content", lang,
-            "downloads", "stillmotion-server", "index.md"
-        )
-        update_file(filepath, args.version, args.tag, args.repo, sizes, lang)
+    filepath = os.path.join(
+        project_root, "data", "downloads", "stillmotion-server.yaml"
+    )
 
-    print(f"Download pages updated for v{args.version}")
+    content = build_data_file(args.version, args.tag, args.repo, sizes)
+
+    with open(filepath, "w") as f:
+        f.write(content)
+
+    print(f"  Updated: {filepath}")
+    print(f"Data file updated for v{args.version}")
 
 
 if __name__ == "__main__":
