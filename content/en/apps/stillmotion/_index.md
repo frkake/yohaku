@@ -43,6 +43,10 @@ app:
         - "Folder recursive mode"
         - "Vector SVG rendering"
         - "Selection mode"
+  screenshots:
+    - alt: "Slideshow playback"
+    - alt: "Tile view"
+    - alt: "Media browser"
   localServer:
     description: "Your PC media, on your device."
     downloadUrl: "/en/downloads/stillmotion-server/"

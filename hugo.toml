@@ -40,6 +40,7 @@ theme = "github.com/nunocoracao/blowfish/v2"
 # Blowfish Theme Parameters
 # =============================================================================
 [params]
+  copyright = "&copy; { year } Takumi Iida"
   colorScheme = "lessismore"
   defaultAppearance = "light"
   autoSwitchAppearance = true
@@ -106,9 +107,14 @@ theme = "github.com/nunocoracao/blowfish/v2"
       weight = 1
 
     [[languages.ja.menus.main]]
+      name = "Downloads"
+      pageRef = "downloads"
+      weight = 2
+
+    [[languages.ja.menus.main]]
       name = "Contact"
       pageRef = "contact"
-      weight = 2
+      weight = 3
 
   [languages.en]
     title = "Less is More"
@@ -127,9 +133,14 @@ theme = "github.com/nunocoracao/blowfish/v2"
       weight = 1
 
     [[languages.en.menus.main]]
+      name = "Downloads"
+      pageRef = "downloads"
+      weight = 2
+
+    [[languages.en.menus.main]]
       name = "Contact"
       pageRef = "contact"
-      weight = 2
+      weight = 3
 
 # =============================================================================
 # Taxonomies

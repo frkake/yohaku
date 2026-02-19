@@ -1,11 +1,9 @@
 ---
 title: "お問い合わせ"
-description: "yohaku へのお問い合わせ"
+# description: "yohaku へのお問い合わせ"
 showDate: false
 showReadingTime: false
 ---
-
-## お問い合わせ
 
 アプリに関するご質問やフィードバックは、App Store の各アプリページからお寄せください。
 

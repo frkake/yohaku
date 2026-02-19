@@ -43,6 +43,11 @@ app:
         - "フォルダ再帰モード"
         - "ベクターSVG表示"
         - "選択モード"
+  screenshots:
+    - alt: "スライドショー再生画面"
+    - alt: "タイル表示"
+    - alt: "メディアブラウザ"
+  screenshotsDraft: true
   localServer:
     description: "PCのメディアを、手元のデバイスで。"
     downloadUrl: "/ja/downloads/stillmotion-server/"
