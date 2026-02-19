@@ -17,3 +17,7 @@
     document.querySelectorAll('.fade-in-up').forEach((el) => el.classList.add('visible'));
   }
 </script>
+{{/* No-JS fallback: show content when JavaScript is disabled */}}
+<noscript>
+  <style>.fade-in-up { opacity: 1 !important; transform: none !important; }</style>
+</noscript>

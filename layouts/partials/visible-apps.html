@@ -1,0 +1,12 @@
+{{/* status:"draft" は site.BuildDrafts が true の場合のみ含める */}}
+{{ $visible := slice }}
+{{ range sort (index .Data.apps) "slug" }}
+  {{ if eq .status "draft" }}
+    {{ if site.BuildDrafts }}
+      {{ $visible = $visible | append . }}
+    {{ end }}
+  {{ else }}
+    {{ $visible = $visible | append . }}
+  {{ end }}
+{{ end }}
+{{ return $visible }}

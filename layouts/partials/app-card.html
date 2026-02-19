@@ -19,7 +19,13 @@
   </div>
 
   <div class="app-card-info">
-    <h3>{{ $app.name }}{{ if eq $app.status "coming_soon" }} <span class="app-card-badge">Coming Soon</span>{{ end }}</h3>
+    <h3>{{ $app.name }}
+      {{ if eq $app.status "coming_soon" }}
+        <span class="app-card-badge">{{ i18n "app_coming_soon" }}</span>
+      {{ else if eq $app.status "draft" }}
+        <span class="app-card-badge app-card-badge-draft">{{ i18n "app_draft" }}</span>
+      {{ end }}
+    </h3>
     <p>{{ $tagline }}</p>
     {{ with $app.platforms }}
       <span class="app-card-platforms">{{ delimit . " / " }}</span>

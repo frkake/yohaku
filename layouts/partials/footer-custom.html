@@ -4,9 +4,17 @@
   <div>
     <h4 class="text-neutral-500 dark:text-neutral-400">Apps</h4>
     <ul>
-      {{ range sort (index .Site.Data.apps) "slug" }}
+      {{ $apps := partial "visible-apps.html" .Site }}
+      {{ range $apps }}
         <li>
-          <a href="{{ printf "/%s/apps/%s/" $.Site.Language.Lang .slug }}">{{ .name }}</a>
+          <a href="{{ printf "/%s/apps/%s/" $.Site.Language.Lang .slug }}">
+            {{ .name }}
+            {{ if eq .status "coming_soon" }}
+              <span class="footer-app-badge">{{ i18n "app_coming_soon" }}</span>
+            {{ else if eq .status "draft" }}
+              <span class="footer-app-badge footer-app-badge-draft">{{ i18n "app_draft" }}</span>
+            {{ end }}
+          </a>
         </li>
       {{ end }}
     </ul>

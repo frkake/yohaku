@@ -52,6 +52,8 @@
     {{ $appName }}
     {{ if eq $status "coming_soon" }}
       <span class="badge-coming-soon">Coming Soon</span>
+    {{ else if eq $status "draft" }}
+      <span class="badge-draft">{{ i18n "app_draft" }}</span>
     {{ end }}
   </h1>
 

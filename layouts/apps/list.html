@@ -11,7 +11,8 @@
 
   {{/* App Cards Grid */}}
   <section class="app-cards">
-    {{ range sort (index .Site.Data.apps) "slug" }}
+    {{ $apps := partial "visible-apps.html" .Site }}
+    {{ range $apps }}
       {{ partial "app-card.html" (dict "app" . "site" $.Site) }}
     {{ end }}
   </section>
