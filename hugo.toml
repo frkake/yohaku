@@ -107,14 +107,9 @@ theme = "github.com/nunocoracao/blowfish/v2"
       weight = 1
 
     [[languages.ja.menus.main]]
-      name = "Downloads"
-      pageRef = "downloads"
-      weight = 2
-
-    [[languages.ja.menus.main]]
       name = "Contact"
       pageRef = "contact"
-      weight = 3
+      weight = 2
 
   [languages.en]
     title = "Less is More"
@@ -133,14 +128,9 @@ theme = "github.com/nunocoracao/blowfish/v2"
       weight = 1
 
     [[languages.en.menus.main]]
-      name = "Downloads"
-      pageRef = "downloads"
-      weight = 2
-
-    [[languages.en.menus.main]]
       name = "Contact"
       pageRef = "contact"
-      weight = 3
+      weight = 2
 
 # =============================================================================
 # Taxonomies

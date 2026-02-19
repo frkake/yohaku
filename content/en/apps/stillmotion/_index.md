@@ -1,7 +1,7 @@
 ---
 title: "StillMotion - Features | Media Viewer for iOS, iPadOS & macOS"
 linkTitle: "StillMotion"
-description: "Supports 20+ formats including RAW, MKV, and WebM. Slideshow, tile view, dual-engine video playback. Dropbox and Google Drive integration. No ads. One-time purchase."
+description: "Supports 20+ formats including RAW, MKV, and WebM. Slideshow, tile view, play any video format. Dropbox and Google Drive integration. No ads. One-time purchase."
 layout: "single"
 showTableOfContents: false
 app:
@@ -20,10 +20,10 @@ app:
       description: "Mix images and videos. Play them together. Crossfade, shuffle, custom intervals -- all adjustable in real time, without stopping playback."
     - title: "Tile View"
       description: "Up to 30 items, one screen. Compare images and videos side by side. Auto-layout adapts to your media count. Drag to rearrange, pinch to zoom. Videos play inline."
-    - title: "Dual-Engine Video Playback"
-      description: "No format left behind. Dual engines -- AVPlayer and VLCKit -- switch automatically. MP4, MOV, MKV, WebM, FLV, WMV, AVI and more."
+    - title: "Play Any Video"
+      description: "No format left behind. MP4, MOV, MKV, WebM, FLV, WMV, AVI and more. Whatever your video format, it just plays."
     - title: "6 Media Sources"
-      description: "Your media, wherever it lives. Photos, Files, Dropbox, Google Drive, Google Photos, Local Server, Offline. Six sources, one app."
+      description: "Your media, wherever it lives. Photos, Files, Dropbox, Google Drive, Google Photos, Local Server. Six sources, one app."
   pricing:
     free:
       - "6 media sources"
@@ -54,25 +54,16 @@ app:
 
 ## Images and videos, without boundaries.
 
-Photos, RAW, MKV, WebM -- 20+ formats supported.
-6 media sources in one app, seamlessly.
+Stop worrying about formats.
+Browse all your photos and videos in one app, no matter where they're from.
 
 ## On every Apple device.
 
 iPhone, iPad, Mac, Apple Watch.
-Access your media across all your devices.
+One universal app, one purchase. Your media viewer on every device you own.
 
 ## Start free. Upgrade when you're ready.
 
-The free version includes 6 media sources, 20+ format support,
-basic slideshow, and more -- enough for everyday use.
-No ads, ever.
-
-One-time purchase, $4.99. No subscription. Buy once, use forever.
-
-## Local Server
-
-Browse photos and videos on your PC directly from the StillMotion app, over LAN.
-No internet required. Pair with a QR code.
-
-Looking for the Local Server? [Go to Downloads](/en/downloads/stillmotion-server/)
+No ads. Use it free, for as long as you want.
+When you're ready for more, unlock everything for $4.99.
+One-time purchase, no subscription. It's yours forever.
