@@ -1126,6 +1126,10 @@ code, pre {
 /* =========================================================================
    Blowfish Footer Override (reduce gap between custom footer and copyright)
    ========================================================================= */
+#main-content {
+  min-height: 100vh;
+}
+
 #site-footer {
   padding-top: var(--space-2);
 }
