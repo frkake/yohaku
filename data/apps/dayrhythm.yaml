@@ -7,4 +7,4 @@ icon: "images/apps/dayrhythm/icon.png"
 iconDark: "images/apps/dayrhythm/icon-dark.png"
 platforms:
   - iOS
-status: "coming_soon" # draft|coming_soon|released
+status: "draft" # draft|coming_soon|released
