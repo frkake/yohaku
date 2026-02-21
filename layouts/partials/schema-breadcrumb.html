@@ -13,21 +13,13 @@
 {{ end }}
 
 {{ if gt (len $breadcrumbs) 1 }}
+  {{- $items := slice -}}
+  {{- range $i, $item := $breadcrumbs -}}
+    {{- $listItem := dict "@type" "ListItem" "position" (add $i 1) "name" $item.name "item" $item.url -}}
+    {{- $items = $items | append $listItem -}}
+  {{- end -}}
+  {{- $schema := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items -}}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {{- range $i, $item := $breadcrumbs -}}
-    {{ if $i }},{{ end }}
-    {
-      "@type": "ListItem",
-      "position": {{ add $i 1 }},
-      "name": {{ $item.name | jsonify }},
-      "item": {{ $item.url | jsonify }}
-    }
-    {{- end -}}
-  ]
-}
+{{ $schema | jsonify }}
 </script>
 {{ end }}
