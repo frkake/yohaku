@@ -50,6 +50,18 @@
         </section>
       {{ end }}
 
+      {{/* Media Sources */}}
+      {{ with $app.mediaSources }}
+        <hr class="app-section-divider">
+        {{ partial "media-sources.html" (dict "mediaSources" .) }}
+      {{ end }}
+
+      {{/* Supported Formats */}}
+      {{ with $app.formats }}
+        <hr class="app-section-divider">
+        {{ partial "format-grid.html" (dict "formats" .) }}
+      {{ end }}
+
       {{/* Pricing (includes App Store badge as decision-point CTA) */}}
       {{ with $app.pricing }}
         <hr class="app-section-divider">

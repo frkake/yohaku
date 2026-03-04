@@ -1,7 +1,7 @@
 ---
 title: "StillMotion - 機能紹介 | iOS/iPadOS/macOS対応メディアビューア"
 linkTitle: "StillMotion"
-description: "RAW、MKV、WebMなど20種類以上のフォーマットに対応。スライドショー、並べて表示、あらゆる動画フォーマットを再生。Dropbox・Google Drive連携。広告なし・買い切り。"
+description: "RAW、MKV、WebMなど20種類以上のフォーマットに対応。スライドショー、並べて表示、あらゆる動画フォーマットを再生。Dropbox連携。Google Drive・Google Photos対応予定。広告なし・買い切り。"
 layout: "single"
 showTableOfContents: false
 app:
@@ -22,11 +22,11 @@ app:
       description: "最大30枚を、1画面に。画像も動画も一度に並べて確認できる。メディア数に応じて自動レイアウト。ドラッグで並び替え、ピンチズームで拡大。動画はインラインで再生。"
     - title: "あらゆる動画を再生"
       description: "再生できない動画フォーマットは、もうありません。MP4やMOVはもちろん、MKV、WebM、FLV、WMV、AVIまで。フォーマットを気にせず、すべての動画をそのまま再生できます。"
-    - title: "6つのメディアソース"
-      description: "保存場所を選ばない。写真アプリ、ファイルアプリ、Dropbox、Google Drive、Google Photos、ローカルサーバー。どこにあるメディアも、ひとつのアプリで。"
+    - title: "多彩なメディアソース"
+      description: "保存場所を選ばない。写真アプリ、ファイルアプリ、Dropbox、ローカルサーバー、SSH/SFTP。どこにあるメディアも、ひとつのアプリで。"
   pricing:
     free:
-      - "6つのメディアソース"
+      - "多彩なメディアソース"
       - "20種類以上のフォーマット"
       - "基本スライドショー"
       - "メディアブラウザ"
@@ -43,6 +43,30 @@ app:
         - "フォルダ再帰モード"
         - "ベクターSVG表示"
         - "選択モード"
+  formats:
+    - category: "画像"
+      items: ["JPEG", "PNG", "HEIC", "HEIF", "WebP", "TIFF", "BMP", "AVIF", "GIF", "ICO"]
+    - category: "RAW"
+      items: ["DNG", "CR2", "NEF", "ARW"]
+    - category: "動画"
+      items: ["MP4", "MOV", "MKV", "WebM", "FLV", "WMV", "AVI", "M4V", "3GP", "TS"]
+    - category: "その他"
+      items: ["SVG", "M3U8"]
+  mediaSources:
+    - name: "写真アプリ"
+      status: "available"
+    - name: "ファイルアプリ"
+      status: "available"
+    - name: "Dropbox"
+      status: "available"
+    - name: "ローカルサーバー"
+      status: "available"
+    - name: "SSH / SFTP"
+      status: "available"
+    - name: "Google Drive"
+      status: "coming_soon"
+    - name: "Google Photos"
+      status: "coming_soon"
   screenshots:
     - alt: "スライドショー再生画面"
     - alt: "並べて表示"

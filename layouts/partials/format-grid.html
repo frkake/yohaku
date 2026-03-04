@@ -1,0 +1,19 @@
+{{/* Format Grid
+     Expects: .formats (array of category, items) */}}
+{{ $formats := .formats }}
+
+<section class="format-grid-section fade-in-up">
+  <h2>{{ i18n "supported_formats_title" | default "Supported Formats" }}</h2>
+  <div class="format-rows">
+    {{ range $formats }}
+      <div class="format-row">
+        <span class="format-row-label">{{ .category }}</span>
+        <div class="format-row-tags">
+          {{ range .items }}
+            <span class="format-tag">{{ . }}</span>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</section>

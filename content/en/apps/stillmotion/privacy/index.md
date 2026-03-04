@@ -19,7 +19,7 @@ We may receive anonymized usage statistics through Apple's standard analytics (A
 
 ## Third-Party Service Integrations
 
-The App provides optional integrations with the following third-party services. All integrations are read-only and used solely for browsing and viewing media within the App.
+The App provides optional integrations with the following third-party services. All integrations are read-only and used solely for browsing and viewing media within the App. Some integrations listed below may be pending deployment and not yet available in the current release.
 
 ### Google Drive
 

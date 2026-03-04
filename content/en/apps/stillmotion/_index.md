@@ -1,7 +1,7 @@
 ---
 title: "StillMotion - Features | Media Viewer for iOS, iPadOS & macOS"
 linkTitle: "StillMotion"
-description: "Supports 20+ formats including RAW, MKV, and WebM. Slideshow, tile view, play any video format. Dropbox and Google Drive integration. No ads. One-time purchase."
+description: "Supports 20+ formats including RAW, MKV, and WebM. Slideshow, tile view, play any video format. Dropbox integration. Google Drive and Google Photos coming soon. No ads. One-time purchase."
 layout: "single"
 showTableOfContents: false
 app:
@@ -22,11 +22,11 @@ app:
       description: "Up to 30 items, one screen. Compare images and videos side by side. Auto-layout adapts to your media count. Drag to rearrange, pinch to zoom. Videos play inline."
     - title: "Play Any Video"
       description: "No format left behind. MP4, MOV, MKV, WebM, FLV, WMV, AVI and more. Whatever your video format, it just plays."
-    - title: "6 Media Sources"
-      description: "Your media, wherever it lives. Photos, Files, Dropbox, Google Drive, Google Photos, Local Server. Six sources, one app."
+    - title: "Flexible Media Sources"
+      description: "Your media, wherever it lives. Photos, Files, Dropbox, Local Server, SSH/SFTP. One app for all of it."
   pricing:
     free:
-      - "6 media sources"
+      - "Flexible media sources"
       - "20+ format support"
       - "Basic slideshow"
       - "Media browser"
@@ -43,6 +43,30 @@ app:
         - "Folder recursive mode"
         - "Vector SVG rendering"
         - "Selection mode"
+  formats:
+    - category: "Image"
+      items: ["JPEG", "PNG", "HEIC", "HEIF", "WebP", "TIFF", "BMP", "AVIF", "GIF", "ICO"]
+    - category: "RAW"
+      items: ["DNG", "CR2", "NEF", "ARW"]
+    - category: "Video"
+      items: ["MP4", "MOV", "MKV", "WebM", "FLV", "WMV", "AVI", "M4V", "3GP", "TS"]
+    - category: "Other"
+      items: ["SVG", "M3U8"]
+  mediaSources:
+    - name: "Photos"
+      status: "available"
+    - name: "Files"
+      status: "available"
+    - name: "Dropbox"
+      status: "available"
+    - name: "Local Server"
+      status: "available"
+    - name: "SSH / SFTP"
+      status: "available"
+    - name: "Google Drive"
+      status: "coming_soon"
+    - name: "Google Photos"
+      status: "coming_soon"
   screenshots:
     - alt: "Slideshow playback"
     - alt: "Tile view"

@@ -1,0 +1,17 @@
+{{/* Media Sources
+     Expects: .mediaSources (array of name, status) */}}
+{{ $sources := .mediaSources }}
+
+<section class="media-sources-section fade-in-up">
+  <h2>{{ i18n "media_sources_title" | default "Media Sources" }}</h2>
+  <div class="media-sources-chips">
+    {{ range $sources }}
+      <span class="media-source-chip {{ if eq .status "coming_soon" }}media-source-chip-soon{{ end }}">
+        {{- .name -}}
+        {{ if eq .status "coming_soon" }}
+          <span class="media-source-chip-label">{{ i18n "coming_soon" | default "Coming Soon" }}</span>
+        {{ end }}
+      </span>
+    {{ end }}
+  </div>
+</section>

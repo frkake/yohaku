@@ -1,7 +1,12 @@
 {{/* Feature Card
-     Expects: dict with .feature (title, description) and .index (0-based) */}}
+     Expects: dict with .feature (title, description, badge) and .index (0-based) */}}
 <div class="feature-card">
-  <span class="feature-number">{{ printf "%02d" (add .index 1) }}</span>
+  <div class="feature-card-header">
+    <span class="feature-number">{{ printf "%02d" (add .index 1) }}</span>
+    {{ with .feature.badge }}
+      <span class="feature-badge feature-badge-{{ . }}">{{ i18n . }}</span>
+    {{ end }}
+  </div>
   <h3>{{ .feature.title }}</h3>
   <p>{{ .feature.description }}</p>
 </div>
