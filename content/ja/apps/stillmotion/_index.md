@@ -12,7 +12,6 @@ app:
     - iOS
     - iPadOS
     - macOS
-    - watchOS
   appStoreUrl: "https://apps.apple.com/app/stillmotion/id6737835203"
   status: "released"
   features:
@@ -32,7 +31,6 @@ app:
       - "メディアブラウザ"
       - "お気に入り・履歴"
       - "ダークモード"
-      - "watchOS対応"
     full:
       price: "¥800（買い切り）"
       extras:
@@ -68,10 +66,15 @@ app:
     - name: "Google Photos"
       status: "coming_soon"
   screenshots:
-    - alt: "スライドショー再生画面"
-    - alt: "並べて表示"
+    - alt: "並べて表示 — 画像も動画も、1画面で同時に再生"
+      src: "images/apps/stillmotion/screenshots/ja/tile.png"
+    - alt: "画像も動画も、区別なく閲覧できるビューア"
+      src: "images/apps/stillmotion/screenshots/ja/viewer.png"
     - alt: "メディアブラウザ"
-  screenshotsDraft: true
+      src: "images/apps/stillmotion/screenshots/ja/browser.png"
+    - alt: "多彩なメディアソース"
+      src: "images/apps/stillmotion/screenshots/ja/sources.png"
+  screenshotsDraft: false
   localServer:
     description: "PCのメディアを、手元のデバイスで。"
     downloadUrl: "/ja/downloads/stillmotion-server/"
@@ -84,7 +87,7 @@ app:
 
 ## あらゆるAppleデバイスで。
 
-iPhone、iPad、Mac、Apple Watch。
+iPhone、iPad、Mac。
 ユニバーサルアプリだから、一度購入すればすべてのデバイスで使えます。
 
 ## 無料で始める。必要なら、もっと。

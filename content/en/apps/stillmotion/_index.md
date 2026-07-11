@@ -12,7 +12,6 @@ app:
     - iOS
     - iPadOS
     - macOS
-    - watchOS
   appStoreUrl: "https://apps.apple.com/app/stillmotion/id6737835203"
   status: "released"
   features:
@@ -32,7 +31,6 @@ app:
       - "Media browser"
       - "Favorites & history"
       - "Dark mode"
-      - "watchOS support"
     full:
       price: "$4.99 (one-time)"
       extras:
@@ -68,9 +66,15 @@ app:
     - name: "Google Photos"
       status: "coming_soon"
   screenshots:
-    - alt: "Slideshow playback"
-    - alt: "Tile view"
+    - alt: "Tile view — photos and videos side by side"
+      src: "images/apps/stillmotion/screenshots/en/tile.png"
+    - alt: "One viewer for everything"
+      src: "images/apps/stillmotion/screenshots/en/viewer.png"
     - alt: "Media browser"
+      src: "images/apps/stillmotion/screenshots/en/browser.png"
+    - alt: "All your sources"
+      src: "images/apps/stillmotion/screenshots/en/sources.png"
+  screenshotsDraft: false
   localServer:
     description: "Your PC media, on your device."
     downloadUrl: "/en/downloads/stillmotion-server/"
@@ -83,7 +87,7 @@ Browse all your photos and videos in one app, no matter where they're from.
 
 ## On every Apple device.
 
-iPhone, iPad, Mac, Apple Watch.
+iPhone, iPad, Mac.
 One universal app, one purchase. Your media viewer on every device you own.
 
 ## Start free. Upgrade when you're ready.

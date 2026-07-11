@@ -29,4 +29,19 @@
       </li>
     </ul>
   </div>
+
+  {{/* Legal Column */}}
+  <div>
+    <h4 class="text-neutral-500 dark:text-neutral-400">{{ i18n "footer_legal" | default "Legal" }}</h4>
+    <ul>
+      {{ $apps := partial "visible-apps.html" .Site }}
+      {{ range $apps }}
+        {{ if ne .status "coming_soon" }}
+          <li>
+            <a href="{{ printf "/%s/apps/%s/privacy/" $.Site.Language.Lang .slug }}">{{ .name }} {{ i18n "privacy_policy" | default "Privacy Policy" }}</a>
+          </li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
 </div>

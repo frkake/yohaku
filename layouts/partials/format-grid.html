@@ -4,15 +4,11 @@
 
 <section class="format-grid-section fade-in-up">
   <h2>{{ i18n "supported_formats_title" | default "Supported Formats" }}</h2>
-  <div class="format-rows">
+  <div class="format-table">
     {{ range $formats }}
-      <div class="format-row">
-        <span class="format-row-label">{{ .category }}</span>
-        <div class="format-row-tags">
-          {{ range .items }}
-            <span class="format-tag">{{ . }}</span>
-          {{ end }}
-        </div>
+      <div class="format-table-row">
+        <span class="format-table-category">{{ .category }}</span>
+        <span class="format-table-items">{{ delimit .items ", " }}</span>
       </div>
     {{ end }}
   </div>

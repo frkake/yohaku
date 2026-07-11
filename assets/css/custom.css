@@ -349,6 +349,15 @@ code, pre {
   padding: 0 var(--space-3);
 }
 
+.app-screenshot-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
 /* =========================================================================
    Section Dividers
    ========================================================================= */
@@ -549,48 +558,32 @@ code, pre {
   margin-bottom: var(--space-6);
 }
 
-.format-rows {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+.format-table {
+  border-top: 1px solid rgba(128, 128, 128, 0.12);
 }
 
-.format-row {
+.format-table-row {
   display: flex;
   align-items: baseline;
-  gap: var(--space-4);
+  gap: var(--space-5);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.08);
 }
 
-.format-row-label {
+.format-table-category {
   flex-shrink: 0;
-  width: 4rem;
+  width: 3.5rem;
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   opacity: 0.45;
   text-align: right;
 }
 
-.format-row-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.format-tag {
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 3px 10px;
-  border-radius: var(--radius-sm);
-  background-color: rgb(245 245 245);
-  border: 1px solid rgba(128, 128, 128, 0.1);
+.format-table-items {
+  font-size: 0.875rem;
   font-family: var(--font-mono);
-}
-
-.dark .format-tag {
-  background-color: rgb(38 38 38);
-  border-color: rgba(128, 128, 128, 0.2);
+  line-height: 1.8;
+  letter-spacing: 0.01em;
 }
 
 /* =========================================================================
@@ -1365,12 +1358,13 @@ code, pre {
     grid-template-columns: 1fr;
   }
 
-  .format-row {
+  .format-table-row {
     flex-direction: column;
-    gap: var(--space-2);
+    gap: var(--space-1);
+    padding: var(--space-3) 0;
   }
 
-  .format-row-label {
+  .format-table-category {
     text-align: left;
     width: auto;
   }
