@@ -66,7 +66,7 @@ app:
     - name: "Google Photos"
       status: "coming_soon"
   screenshots:
-    - alt: "並べて表示 — 画像も動画も、1画面で同時に再生"
+    - alt: "並べて表示 — 最大30枚を1画面で同時に再生"
       src: "images/apps/stillmotion/screenshots/ja/tile.png"
     - alt: "画像も動画も、区別なく閲覧できるビューア"
       src: "images/apps/stillmotion/screenshots/ja/viewer.png"
